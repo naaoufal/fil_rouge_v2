@@ -1,4 +1,18 @@
+import { useEffect } from "react"
+import { toast, ToastContainer, Zoom } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
+
 function AdminLogin () {
+
+    function Admin () {
+        toast.configure()
+        toast.info("You Logged Successfully !!!")
+    }
+
+    useEffect(() => {
+
+    })
+
     return (
         <div id="login-page">
             <div class="container">
@@ -13,7 +27,7 @@ function AdminLogin () {
                     <a data-toggle="modal" href="login.html#myModal">Mot de passe oublié ?</a>
                     </span>
                     </label>
-                <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> S'identifier</button>
+                <button class="btn btn-theme btn-block" href="index.html" onClick={Admin} type="submit"><i class="fa fa-lock"></i> S'identifier</button>
                 </div>
                 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">

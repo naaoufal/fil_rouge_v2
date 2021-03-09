@@ -1,4 +1,21 @@
+import { useEffect } from "react"
+import { toast, ToastContainer, Zoom } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
+
 function Login () {
+
+    
+
+    function clickMe () {
+        toast.configure()
+        toast.info("Bla Bla Bla !!!")
+        //toast.error("This is no Good Bro !!!")
+    }
+
+    useEffect(() => {
+
+    }, [])
+
     return (
         <div id="login-page">
             <div class="container">
@@ -13,7 +30,7 @@ function Login () {
                     <a data-toggle="modal" href="login.html#myModal">Mot de passe oublié ?</a>
                     </span>
                     </label>
-                <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> S'identifier</button>
+                <button class="btn btn-theme btn-block" type="button" onClick={clickMe}><i class="fa fa-lock"></i> S'identifier</button>
                 <hr />
                 <div class="registration">
                     Vous n'avez pas encore de compte ?<br/>
