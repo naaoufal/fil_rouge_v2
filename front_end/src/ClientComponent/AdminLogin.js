@@ -1,26 +1,19 @@
-function Login () {
+function AdminLogin () {
     return (
         <div id="login-page">
             <div class="container">
             <div class="form-login" action="index.html">
                 <h2 class="form-login-heading">Se Connecter</h2>
                 <div class="login-wrap">
-                <input type="text" class="form-control" placeholder="Email" autofocus />
+                <input type="text" class="form-control" placeholder="Email d'administrateur" autofocus />
                 <br />
-                <input type="password" class="form-control" placeholder="Mot de Passe" />
+                <input type="password" class="form-control" placeholder="Mot de Passe d'administrateur" />
                 <label class="checkbox">
                     <span class="pull-right">
                     <a data-toggle="modal" href="login.html#myModal">Mot de passe oublié ?</a>
                     </span>
                     </label>
                 <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> S'identifier</button>
-                <hr />
-                <div class="registration">
-                    Vous n'avez pas encore de compte ?<br/>
-                    <a class="" href="#">
-                    Créer un compte
-                    </a>
-                </div>
                 </div>
                 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
@@ -46,4 +39,4 @@ function Login () {
     )
 }
 
-export default Login
+export default AdminLogin

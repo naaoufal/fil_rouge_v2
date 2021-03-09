@@ -6,6 +6,7 @@ import Hero from './ClientComponent/Hero';
 import Services from './ClientComponent/Services';
 import Footer from './ClientComponent/Footer';
 import Login from './ClientComponent/Login';
+import AdminLogin from './ClientComponent/AdminLogin';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" exact component={Services} />
         <Route path="/" exact component={Footer} />
         <Route path="/UserLogin" exact component={Login} />
+        <Route path="/AdminLogin" exact component={AdminLogin} />
       </Switch>
     </Router>
   );
