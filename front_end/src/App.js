@@ -5,6 +5,7 @@ import Header from "./ClientComponent/Header";
 import Hero from './ClientComponent/Hero';
 import Services from './ClientComponent/Services';
 import Footer from './ClientComponent/Footer';
+import Login from './ClientComponent/Login';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" exact component={Hero} />
         <Route path="/" exact component={Services} />
         <Route path="/" exact component={Footer} />
+        <Route path="/UserLogin" exact component={Login} />
       </Switch>
     </Router>
   );
