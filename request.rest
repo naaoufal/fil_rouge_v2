@@ -1,0 +1,26 @@
+GET http://localhost:3001/api/admins/all
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGVtYWlsIjoibmFvdWZlbGJlbm1lbnNvdXJAZ21haWwuY29tIiwiYWRwYXNzd29yZCI6ImF6ZXIiLCJpYXQiOjE2MTUzMzc0MDN9.2cRZOqskLOQYxIzllynQVm98Eeu5kpV_h-VrtfMXOsA
+
+###
+
+POST http://localhost:3001/api/admins/add
+Content-Type: application/json
+
+{
+    "firstname" : "naoufal",
+    "lastname" : "benmansour",
+    "gender" : "mâle",
+    "email" : "naoufelbenmensour@gmail.com",
+    "adress" : "Lotissement X rue X",
+    "phone" : 614675855,
+    "password" : "azer"
+}
+
+###
+POST http://localhost:3001/api/admins/Auth
+Content-Type: application/json
+
+{
+    "email" : "naoufelbenmensour@gmail.com",
+    "password" : "azer"
+}
