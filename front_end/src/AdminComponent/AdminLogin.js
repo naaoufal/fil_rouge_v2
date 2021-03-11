@@ -30,7 +30,8 @@ function AdminLogin () {
         }).then(res => {
             return res.json()
         }).then(data => {
-            console.log(data.accessToken)
+            //console.log(data.accessToken)
+            localStorage.setItem('token', data.accessToken)
             if(data.accessToken){
                 // fetch for data to login:
                 fetch("http://localhost:3001/api/admins/all", {
