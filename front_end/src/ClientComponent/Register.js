@@ -1,35 +1,25 @@
-import { useEffect } from "react"
-import { toast, ToastContainer, Zoom } from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css'
 
-function Login () {
+
+function Register () {
 
     
-
-    function clickMe () {
-        toast.configure()
-        
-    }
-
-    useEffect(() => {
-
-    }, [])
 
     return (
         <div id="login-page">
             <div class="container">
             <div class="form-login" action="index.html">
-                <h2 class="form-login-heading">Se Connecter</h2>
+                <h2 class="form-login-heading">S'inscrire</h2>
                 <div class="login-wrap">
-                <input type="text" class="form-control" placeholder="Email" autofocus />
-                <br />
+                <input type="text" class="form-control" placeholder="Entrer Votre Nom" autofocus />
+                <input type="text" class="form-control" placeholder="Entrer Votre Prenom" autofocus />
+                <input type="date" class="form-control" autofocus />
                 <input type="password" class="form-control" placeholder="Mot de Passe" />
                 <label class="checkbox">
                     <span class="pull-right">
                     <a data-toggle="modal" href="login.html#myModal">Mot de passe oublié ?</a>
                     </span>
                     </label>
-                <button class="btn btn-theme btn-block" type="button" onClick={clickMe}><i class="fa fa-lock"></i> S'identifier</button>
+                <button class="btn btn-theme btn-block" type="button" ><i class="fa fa-lock"></i> S'identifier</button>
                 <hr />
                 <div class="registration">
                     Vous n'avez pas encore de compte ?<br/>
@@ -62,4 +52,4 @@ function Login () {
     )
 }
 
-export default Login
+export default Register

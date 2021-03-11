@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { toast, ToastContainer, Zoom } from "react-toastify"
+import { useHistory } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css'
 
 function AdminLogin () {
+
+    // init history:
+    let history = useHistory()
 
     // get data from input
     const [email, setEmail] = useState()
@@ -12,7 +16,7 @@ function AdminLogin () {
 
         // initialise toast config
         toast.configure()
-        
+
         // check auth with JWT:
         fetch("http://localhost:3001/api/admins/Auth", {
             method : 'POST',
@@ -40,12 +44,15 @@ function AdminLogin () {
                     data.map(admin => {
                         //check email & password if the same to log in:
                         if(email == admin.email && password == admin.password){
-                            toast.info("T9der Tdkhl")
+                            toast.info("Vous etes Connecté")
+                            localStorage.setItem('adminInfo', JSON.stringify(admin))
+                            //console.log(JSON.parse(localStorage.getItem('adminInfo')))
+                            history.push("/AdminDashboard");
                         }
                     })
                 })
             } else {
-                toast.error("W9f Fin GHAdi")
+                toast.error("Vérifiez vos Informations !!!")
             }
         })
 
@@ -64,6 +71,7 @@ function AdminLogin () {
                 <input type="text" class="form-control" onChange={event => setEmail(event.target.value)} placeholder="Email d'administrateur" autofocus />
                 <br />
                 <input type="password" class="form-control" onChange={event => setPassword(event.target.value)} placeholder="Mot de Passe d'administrateur" />
+                <div id="result"></div>
                 <label class="checkbox">
                     <span class="pull-right">
                     <a data-toggle="modal" href="login.html#myModal">Mot de passe oublié ?</a>

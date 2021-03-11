@@ -1,31 +1,36 @@
-function Header () {
-    return (
-        <div>
-            <div class="navbar navbar-inverse navbar-fixed-top headroom" >
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                        <a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template" /></a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav pull-right">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="sidebar-left.html">Left Sidebar</a></li>
-                                    <li><a href="sidebar-right.html">Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li class="active"><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+import { useEffect } from "react"
+import { Link, useHistory } from "react-router-dom";
+import { toast, ToastContainer, Zoom } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
 
+function Header () {
+
+    // init history
+    let history = useHistory()
+
+    // call information of admin:
+    const info = JSON.parse(localStorage.getItem('adminInfo'))
+
+    // logout function:
+    function logOut () {
+        localStorage.clear()
+        toast.configure()
+        toast.info("Vous etes Deconnecter " + info.firstname)
+        history.push("/AdminLogin")
+    }
+
+    return (
+        <header className="header black-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+            </div>
+            <Link class="logo"><b>You<span>Forum</span></b></Link>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><Link onClick={logOut} class="logout">Se Deconnecter</Link></li>
+                </ul>
+            </div>
+        </header>
     )
 }
 
