@@ -1,4 +1,18 @@
+import { Link, useHistory } from "react-router-dom";
+
 function SideBar () {
+
+    // init history:
+    const history = useHistory()
+
+    // check token if exist:
+    const token = localStorage.getItem('token')
+    if(token) {
+        console.log("this is work")
+    } else {
+        history.push("/AdminLogin")
+    }
+
     return (
         <aside>
             <div id="sidebar" class="nav-collapse">

@@ -8,6 +8,14 @@ function Header () {
     // init history
     let history = useHistory()
 
+    // check if token exist:
+    const token = localStorage.getItem('token')
+    if(token) {
+        console.log("this is work")
+    } else {
+        history.push("/AdminLogin")
+    }
+
     // call information of admin:
     const info = JSON.parse(localStorage.getItem('adminInfo'))
 
