@@ -15,7 +15,7 @@ function ModManagement () {
                     <div className="row">
                         <div class="col-md-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> Table des Modérateurs</h4>
+                                <h4><i class="fa fa-angle-right"></i> Gestion des Modérateurs</h4>
                                 <hr />
                                 <table class="table">
                                     <thead>

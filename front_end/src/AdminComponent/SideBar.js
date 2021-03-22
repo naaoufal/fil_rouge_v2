@@ -20,31 +20,31 @@ function SideBar () {
                 <p class="centered"><Link><img src="" class="img-circle" width="80" /></Link></p>
                 <h5 class="centered">Benmansour Naoufal</h5>
                 <br /> <br />
-                <li>
-                    <Link to="/AdminDashboard">
-                    <span>Informations Générales</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="">
-                    <span>Gestion des Modérateurs</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="">
-                    <span>Gestion des Posts</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="">
-                    <span>Gestion des Tags et Themes</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="">
-                    <span>Gestion des Contacts</span>
-                    </Link>
-                </li>
+                    <li>
+                        <Link to="/AdminDashboard">
+                        <span>Informations Générales</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/AdminDashboard/staff">
+                        <span>Gestion des Modérateurs</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/AdminDashboard/posts">
+                        <span>Gestion des Posts</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/AdminDashboard/tags">
+                        <span>Gestion des Tags et Themes</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/AdminDashboard/contacts">
+                        <span>Gestion des Contacts</span>
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </aside>

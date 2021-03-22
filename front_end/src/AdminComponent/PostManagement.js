@@ -1,22 +1,9 @@
-import { useHistory } from 'react-router';
-import { toast } from 'react-toastify';
 import Header from '../ClientComponent/Header';
 import SideBar from './SideBar';
 
-function AdminDashboard () {
+function PostManagement () {
 
-    // init history:
-    let history = useHistory()
 
-    const token = localStorage.getItem('token')
-    console.log(token)
-
-    // check if token exist or not:
-    if(token) {
-        console.log("this is good")
-    } else {
-        history.push("/AdminLogin")
-    }
 
     return (
         <section id="container">
@@ -28,7 +15,7 @@ function AdminDashboard () {
                     <div className="row">
                         <div class="col-md-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i>Informations Générales</h4>
+                                <h4><i class="fa fa-angle-right"></i> Gestion des Posts</h4>
                                 <hr />
                             </div>
                         </div>
@@ -39,4 +26,4 @@ function AdminDashboard () {
     )
 }
 
-export default AdminDashboard
+export default PostManagement

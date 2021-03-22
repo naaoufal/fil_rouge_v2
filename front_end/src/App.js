@@ -7,6 +7,9 @@ import Register from './ClientComponent/Register'
 import AdminDashboard from './AdminComponent/AdminDashboard'
 import SideBar from './AdminComponent/SideBar';
 import ModManagement from './AdminComponent/ModManagement';
+import PostManagement from './AdminComponent/PostManagement';
+import TagManagement from './AdminComponent/TagManagement';
+import ContManagement from './AdminComponent/ContManagement';
 
 function App() {
   return (
@@ -19,7 +22,10 @@ function App() {
         <Route path="/AdminLogin" exact component={AdminLogin} />
         <Route path="/UserRegister" exact component={Register} />
         <Route path="/AdminDashboard" exact component={AdminDashboard} />
-        <Route path="/satff" exact component={ModManagement} />
+        <Route path="/AdminDashboard/staff" exact component={ModManagement} />
+        <Route path="/AdminDashboard/posts" exact component={PostManagement} />
+        <Route path="/AdminDashboard/tags" exact component={TagManagement} />
+        <Route path="/AdminDashboard/contacts" exact component={ContManagement} />
       </Switch>
     </Router>
   );
