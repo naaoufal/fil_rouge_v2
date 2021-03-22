@@ -6,6 +6,7 @@ import AdminLogin from './AdminComponent/AdminLogin'
 import Register from './ClientComponent/Register'
 import AdminDashboard from './AdminComponent/AdminDashboard'
 import SideBar from './AdminComponent/SideBar';
+import ModManagement from './AdminComponent/ModManagement';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/AdminLogin" exact component={AdminLogin} />
         <Route path="/UserRegister" exact component={Register} />
         <Route path="/AdminDashboard" exact component={AdminDashboard} />
+        <Route path="/satff" exact component={ModManagement} />
       </Switch>
     </Router>
   );
