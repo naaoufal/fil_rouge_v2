@@ -10,15 +10,26 @@ import ModManagement from './AdminComponent/ModManagement';
 import PostManagement from './AdminComponent/PostManagement';
 import TagManagement from './AdminComponent/TagManagement';
 import ContManagement from './AdminComponent/ContManagement';
+import HeaderStaff from './StaffComponent/Header';
+import SideBarStaff from './StaffComponent/SideBar';
+import StaffLogin from './StaffComponent/StaffLogin';
+import StaffDashboard from './StaffComponent/StaffDashboard'
 
 function App() {
   return (
     <Router>
       <Route path="/" exact component={Header} />
       <Route path="/" exact component={SideBar} />
+      <Route path="/" exact component={HeaderStaff} />
+      <Route path="/" exact component={SideBarStaff} />
       {/* URL ROUTE COMPONENT */}
       <Switch>
+        {/* Staff Part */}
+        <Route path="/StaffLogin" exact component={StaffLogin} />
+        <Route path="/StaffDashboard" exact component={StaffDashboard} />
+        {/* User Part */}
         <Route path="/UserLogin" exact component={Login} />
+        {/* Super Admin Part */}
         <Route path="/AdminLogin" exact component={AdminLogin} />
         <Route path="/UserRegister" exact component={Register} />
         <Route path="/AdminDashboard" exact component={AdminDashboard} />
