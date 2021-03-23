@@ -39,7 +39,7 @@ function ModManagement () {
                                             <td>0614675855</td>
                                             <td>27-06-1996</td>
                                             <td>Rue 1 Lotissement 1</td>
-                                            <td><button className="btn btn-info">Modifier</button> <button className="btn btn-danger">Supprimer</button></td>
+                                            <td><button className="btn btn-info">Modifier</button> <button className="btn btn-danger">Supprimer</button> <button className="btn btn-warning">Suspendre</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
