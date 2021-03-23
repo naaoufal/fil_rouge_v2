@@ -22,10 +22,10 @@ function App() {
         <Route path="/AdminLogin" exact component={AdminLogin} />
         <Route path="/UserRegister" exact component={Register} />
         <Route path="/AdminDashboard" exact component={AdminDashboard} />
-        <Route path="/AdminDashboard/staff" exact component={ModManagement} />
-        <Route path="/AdminDashboard/posts" exact component={PostManagement} />
-        <Route path="/AdminDashboard/tags" exact component={TagManagement} />
-        <Route path="/AdminDashboard/contacts" exact component={ContManagement} />
+        <Route path="/staff" exact component={ModManagement} />
+        <Route path="/posts" exact component={PostManagement} />
+        <Route path="/tags" exact component={TagManagement} />
+        <Route path="/contacts" exact component={ContManagement} />
       </Switch>
     </Router>
   );

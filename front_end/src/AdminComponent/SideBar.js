@@ -26,22 +26,22 @@ function SideBar () {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/AdminDashboard/staff">
+                        <Link to="/staff">
                         <span>Gestion des Modérateurs</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/AdminDashboard/posts">
+                        <Link to="/posts">
                         <span>Gestion des Posts</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/AdminDashboard/tags">
+                        <Link to="/tags">
                         <span>Gestion des Tags et Themes</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/AdminDashboard/contacts">
+                        <Link to="/contacts">
                         <span>Gestion des Contacts</span>
                         </Link>
                     </li>
