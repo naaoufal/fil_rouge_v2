@@ -7,16 +7,18 @@ import Register from './ClientComponent/Register'
 import AdminDashboard from './AdminComponent/AdminDashboard'
 import SideBar from './AdminComponent/SideBar';
 import ModManagement from './AdminComponent/ModManagement';
-import PostManagement from './AdminComponent/PostManagement';
-import TagManagement from './AdminComponent/TagManagement';
-import ContManagement from './AdminComponent/ContManagement';
-import HeaderStaff from './StaffComponent/Header';
-import SideBarStaff from './StaffComponent/SideBar';
-import StaffLogin from './StaffComponent/StaffLogin';
+import PostManagement from './AdminComponent/PostManagement'
+import TagManagement from './AdminComponent/TagManagement'
+import ContManagement from './AdminComponent/ContManagement'
+import HeaderStaff from './StaffComponent/Header'
+import SideBarStaff from './StaffComponent/SideBar'
+import StaffLogin from './StaffComponent/StaffLogin'
 import StaffDashboard from './StaffComponent/StaffDashboard'
-import MembersManagement from './StaffComponent/Members';
+import MembersManagement from './StaffComponent/Members'
 import Events from './StaffComponent/Events'
 import CompManagement from './StaffComponent/Competitions'
+import StaffConManagement from './StaffComponent/StaffContact'
+
 
 function App() {
   return (
@@ -33,7 +35,7 @@ function App() {
         <Route path="/members" exact component={MembersManagement} />
         <Route path="/events" exact component={Events} />
         <Route path="/competitions" exact component={CompManagement} />
-        
+        <Route path="/staffcontacts" exact component={StaffConManagement} />
         {/* User Part */}
         <Route path="/UserLogin" exact component={Login} />
         {/* Super Admin Part */}
