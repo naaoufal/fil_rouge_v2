@@ -15,22 +15,22 @@ function SideBarStaff () {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="/members">
                         <span>Gestion des Members</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/posts">
+                        <Link to="/events">
                         <span>Gestion des Evénements et Ateliers</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/tags">
+                        <Link to="/competitions">
                         <span>Gestion des Compétitions</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/contacts">
+                        <Link to="/staffcontacts">
                         <span>Gestion des Contacts</span>
                         </Link>
                     </li>
