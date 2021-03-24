@@ -15,6 +15,7 @@ import SideBarStaff from './StaffComponent/SideBar';
 import StaffLogin from './StaffComponent/StaffLogin';
 import StaffDashboard from './StaffComponent/StaffDashboard'
 import MembersManagement from './StaffComponent/Members';
+import Events from './StaffComponent/Events'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/StaffLogin" exact component={StaffLogin} />
         <Route path="/StaffDashboard" exact component={StaffDashboard} />
         <Route path="/members" exact component={MembersManagement} />
+        <Route path="/events" exact component={Events} />
         {/* User Part */}
         <Route path="/UserLogin" exact component={Login} />
         {/* Super Admin Part */}
