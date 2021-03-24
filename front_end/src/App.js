@@ -33,6 +33,7 @@ function App() {
         <Route path="/members" exact component={MembersManagement} />
         <Route path="/events" exact component={Events} />
         <Route path="/competitions" exact component={CompManagement} />
+        
         {/* User Part */}
         <Route path="/UserLogin" exact component={Login} />
         {/* Super Admin Part */}
