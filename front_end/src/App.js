@@ -38,6 +38,7 @@ function App() {
         <Route path="/staffcontacts" exact component={StaffConManagement} />
         {/* User Part */}
         <Route path="/UserLogin" exact component={Login} />
+        <Route path="/UserRegister" exact component={Register} />
         {/* Super Admin Part */}
         <Route path="/AdminLogin" exact component={AdminLogin} />
         <Route path="/UserRegister" exact component={Register} />
