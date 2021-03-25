@@ -18,6 +18,7 @@ import MembersManagement from './StaffComponent/Members'
 import Events from './StaffComponent/Events'
 import CompManagement from './StaffComponent/Competitions'
 import StaffConManagement from './StaffComponent/StaffContact'
+import UserHome from './ClientComponent/home';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         {/* User Part */}
         <Route path="/UserLogin" exact component={Login} />
         <Route path="/UserRegister" exact component={Register} />
+        <Route path="/UserHome" exact component={UserHome} />
         {/* Super Admin Part */}
         <Route path="/AdminLogin" exact component={AdminLogin} />
         <Route path="/UserRegister" exact component={Register} />
