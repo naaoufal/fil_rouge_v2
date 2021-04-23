@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom'
 import Header from "./ClientComponent/Header"
 import Login from './ClientComponent/Login'
 import AdminLogin from './AdminComponent/AdminLogin'
@@ -38,6 +38,7 @@ function App() {
         <Route path="/competitions" exact component={CompManagement} />
         <Route path="/staffcontacts" exact component={StaffConManagement} />
         {/* User Part */}
+        <Redirect exact from="/" to="/UserHome" />
         <Route path="/UserLogin" exact component={Login} />
         <Route path="/UserRegister" exact component={Register} />
         <Route path="/UserHome" exact component={UserHome} />

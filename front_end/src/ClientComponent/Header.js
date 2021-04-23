@@ -23,7 +23,7 @@ function Header () {
     function logOut () {
         localStorage.clear()
         toast.configure()
-        toast.info("Vous etes Deconnecter " + info.firstname)
+        toast.warning("Vous etes Deconnecter " + info.firstname)
         history.push("/AdminLogin")
     }
 

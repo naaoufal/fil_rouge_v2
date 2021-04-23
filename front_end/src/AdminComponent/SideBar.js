@@ -7,8 +7,10 @@ function SideBar () {
 
     // check token if exist:
     const token = localStorage.getItem('token')
+    const info = JSON.parse(localStorage.getItem('adminInfo'))
+
     if(token) {
-        console.log("this is work")
+        // put some code here
     } else {
         history.push("/AdminLogin")
     }
@@ -18,7 +20,7 @@ function SideBar () {
             <div id="sidebar" class="nav-collapse">
                 <ul class="sidebar-menu" id="nav-accordion">
                 <p class="centered"><Link><img src="" class="img-circle" width="80" /></Link></p>
-                <h5 class="centered">Benmansour Naoufal</h5>
+                <h5 class="centered">{info.firstname} {info.lastname}</h5>
                 <br /> <br />
                     <li>
                         <Link to="/AdminDashboard">

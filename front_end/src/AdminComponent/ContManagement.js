@@ -1,13 +1,39 @@
 import Header from '../ClientComponent/Header';
+import { Link, useHistory } from "react-router-dom";
 import SideBar from './SideBar';
 
 function ContManagement () {
+    // init history
+    let history = useHistory()
 
+    function renderContactData () {
+        console.log("Work")
+    }
 
+    // check if token exist:
+    const token = localStorage.getItem('token')
+    const info = JSON.parse(localStorage.getItem('adminInfo'))
+    
+    if(token) {
+        // put some code here !!
+        renderContactData()
+    } else {
+        history.push("/AdminLogin")
+    }
 
     return (
         <section id="container">
-            <Header />
+            <header className="header black-bg">
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                </div>
+                <Link class="logo"><b>You<span>Forum</span></b></Link>
+                <div class="top-menu">
+                    <ul class="nav pull-right top-menu">
+                        <li><Link onClick={logOut} class="logout">Se Deconnecter</Link></li>
+                    </ul>
+                </div>
+            </header>
             <SideBar />
             <section id="main-content">
                 <section className="wrapper">
