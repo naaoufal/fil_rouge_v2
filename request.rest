@@ -17,10 +17,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3001/api/admins/Auth
-Content-Type: application/json
+# POST http://localhost:3001/api/admins/Auth
+# Content-Type: application/json
 
-{
-    "email" : "naoufelbenmensour@gmail.com",
-    "password" : "azer"
-}
+# {
+#     "email" : "naoufelbenmensour@gmail.com",
+#     "password" : "azer"
+# }
