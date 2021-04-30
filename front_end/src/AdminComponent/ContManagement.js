@@ -13,7 +13,11 @@ function ContManagement () {
     // check if token exist:
     const token = localStorage.getItem('token')
     const info = JSON.parse(localStorage.getItem('adminInfo'))
-    
+
+    function logOut () {
+        
+    }
+
     if(token) {
         // put some code here !!
         renderContactData()
