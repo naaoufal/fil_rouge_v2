@@ -24,3 +24,7 @@ Content-Type: application/json
     "email" : "naoufelbenmensour@gmail.com",
     "password" : "azer"
 }
+
+###
+GET http://localhost:3001/api/tags/all
+Authorization : bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGVtYWlsIjoibmFvdWZlbGJlbm1lbnNvdXJAZ21haWwuY29tIiwiYWRwYXNzd29yZCI6ImF6ZXIiLCJpYXQiOjE2MjAwNDM2Mzd9.z6iXSmVS-UchCZq0uRfFkYWzJcFDT6iAiupNNSOcNu8

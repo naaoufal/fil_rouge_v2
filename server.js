@@ -14,6 +14,7 @@ app.use(cors())
 
 // declaring url endpoints :
 app.use("/api/admins", require("./back_end/routes/admins"))
+app.use("/api/tags", require("./back_end/routes/tags"))
 
 
 // start the server
