@@ -1,8 +1,33 @@
+import { useEffect, useState } from 'react';
 import Header from '../ClientComponent/Header';
 import SideBar from './SideBar';
 
 function ModManagement () {
 
+    const token = localStorage.getItem('token')
+    const [staffs, setStaffs] = useState([])
+    const [firstname, setFirstName] = useState([])
+    const [lastName, setLastName] = useState([])
+    const gender = document.querySelector('#gender').value
+    const [email, setEmail] = useState([])
+    const [adress, setAdress] = useState([])
+    const [phone, setPhone] = useState([])
+    const [password, setPassword] = useState([])
+    const [birth, setBirth] = useState([])
+
+    // render staffs data :
+    function renderStaff () {
+        fetch("http://localhost:3001/api/staffs").then(res => {
+            return res.json()
+        }).then(data => {
+            setStaffs(data)
+        })
+    }
+
+
+    useEffect(() => {
+        renderStaff()
+    }, [])
 
 
     return (
