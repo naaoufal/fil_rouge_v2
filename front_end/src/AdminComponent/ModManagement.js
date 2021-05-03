@@ -8,7 +8,7 @@ function ModManagement () {
     const [staffs, setStaffs] = useState([])
     const [firstname, setFirstName] = useState([])
     const [lastName, setLastName] = useState([])
-    const gender = document.querySelector('#gender').value
+    //const gender = document.querySelector('#gender').value
     const [email, setEmail] = useState([])
     const [adress, setAdress] = useState([])
     const [phone, setPhone] = useState([])
