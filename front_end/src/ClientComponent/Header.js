@@ -11,7 +11,7 @@ function Header () {
     // check if token exist:
     const token = localStorage.getItem('token')
     if(token) {
-        console.log("this is work")
+        //console.log("this is work")
     } else {
         history.push("/AdminLogin")
     }
