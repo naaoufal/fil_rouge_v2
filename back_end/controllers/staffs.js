@@ -13,7 +13,7 @@ async function all (req, res) {
 
 // Create new staff :
 async function createOne (req, res) {
-    const staff = new Tags({
+    const staff = new Staffs({
         firstname : req.body.firstname,
         lastname : req.body.lastname,
         gender : req.body.gender,
