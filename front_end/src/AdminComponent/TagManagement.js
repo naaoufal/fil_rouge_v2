@@ -70,9 +70,7 @@ function TagManagement () {
 
     // edit a tag : 
     function editTag (id) {
-        const modName = document.getElementById('nm').value
-        const modDesc = document.getElementById('desc').value
-        //console.log(id)
+        console.log(id)
         // if(name && desc) {
         //     fetch(`http://localhost/3001/api/tags/edit/${id}`, {
         //         method : 'PATCH',
@@ -95,15 +93,10 @@ function TagManagement () {
         // }
         // renderTags()
 
-        document.querySelector('#modifier').addEventListener('click', (e) => {
-            e.preventDefault()
-
-            let pressEdit = e.target.id == 'btnmod'
-
-            if(pressEdit){
-                console.log(modName, modDesc)
-            }
-        })
+    }
+    function test(){
+        let id = document.getElementById('full_id').value
+        console.log("working", id, currName && currName, currDesc && currDesc)
     }
 
     useEffect(() => {
@@ -149,33 +142,7 @@ function TagManagement () {
                                     </div>
                                 </div>
                                 {/* modal end */}
-                                {/* modal start */}
-                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="mymodal1" class="modal fade">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Modifier un Tag</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div className="group-control">
-                                                <p>Entrer Le Nom de Tag :</p>
-                                                <input onChange={event => setName(event.target.value)} type="text" name="nm" autocomplete="off" class="form-control placeholder-no-fix" id="nm"/>
-                                            </div>
-                                            <div className="group-control">
-                                                <p>Enter Description du Tag :</p>
-                                                <textarea onChange={event => setDesc(event.target.value)} className="form-control" name="desc" rows="8" cols="80" id="desc"></textarea>
-                                            </div>
-                                            <br/>
-                                            <div id="err"></div>
-                                        </div>
-                                        <div class="modal-footer" id="">
-                                            <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                            <button class="btn btn-theme" id="btnmod" type="button">Modifier</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* modal end */}
+                                
                                 <hr />
                                 <table className="table table-striped">
                                     <thead>
@@ -190,10 +157,43 @@ function TagManagement () {
                                             <tr key={i._id}>
                                                 <td>{i.name}</td>
                                                 <td>{i.desc}</td>
-                                                <td><button data-toggle="modal" href="#mymodal1" className="btn btn-success" onClick={() => editTag(i._id)} data-id={i._id}>Modifier</button> <button onClick={() => deleteTag(i._id)} className="btn btn-warning">Supprimer</button></td>
+                                                <td><button data-toggle="modal" href="#mymodal1" className="btn btn-success" onClick={() => editTag(i._id)}>Modifier</button> <button onClick={() => deleteTag(i._id)} className="btn btn-danger">Supprimer</button></td>
+                                                <input type="text" value={i._id} id="full_id"/>
                                             </tr>
                                         ))}
                                     </tbody>
+                                    {/* modal start */}
+                                    <div aria-hidden="true" aria-labelledby="myModalLabel1" role="dialog" tabindex="-1" id="mymodal1" class="modal fade">
+                                        <div class="modal-dialog">
+                                            
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Modifier un Tag</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                            <form>
+                                                <div className="group-control">
+                                                    <p>Entrer Le Nom de Tag :</p>
+                                                    <input onChange={event => setCurrName(event.target.value)} type="text" name="nm1" autocomplete="off" class="form-control placeholder-no-fix" id="nm1"/>
+                                                </div>
+                                                {currName}
+                                                <div className="group-control">
+                                                    <p>Enter Description du Tag :</p>
+                                                    <textarea onChange={event => setCurrDesc(event.target.value)} className="form-control" name="desc1" rows="8" cols="80" id="desc1"></textarea>
+                                                </div>
+                                                {currDesc}
+                                                <br/>
+                                                <div id="err"></div>
+                                            </form>
+                                            </div>
+                                            <div class="modal-footer" id="modifier">
+                                                <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
+                                                <button class="btn btn-theme" id="btnmod" type="submit" onClick={()=>test()}>Modifier</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* modal end */}
                                 </table>
                             </div>
                         </div>

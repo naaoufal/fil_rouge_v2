@@ -1,3 +1,4 @@
+import { deleteModel } from 'mongoose';
 import { useEffect, useState } from 'react';
 import Header from '../ClientComponent/Header';
 import SideBar from './SideBar';
@@ -85,6 +86,35 @@ function ModManagement () {
         }
     }
 
+    // edit account if suspended or NOT !! :
+    function editStat (id, suspended) {
+        console.log(id, suspended)
+        fetch(`http://localhost:3001/api/staffs/edit/${id}`, {
+            method : 'PATCH',
+            headers : {
+                'Content-Type' : 'application/json',
+                'Authorization' : 'Bearer ' + token
+            },
+            body : JSON.stringify({
+                suspended : !suspended
+            })
+        }).then(res => {
+            renderStaff()
+        })
+    }
+
+    // delete staff function :
+    function deleteMod (id) {
+        //console.log(id)
+        fetch(`http://localhost:3001/api/staffs/delete/${id}`, {
+            method : 'DELETE',
+            headers : {
+                'Authorization' : 'Bearer ' + token
+            }
+        }).then(res => {
+            renderStaff()
+        })
+    }
 
     useEffect(() => {
         renderStaff()
@@ -183,7 +213,13 @@ function ModManagement () {
                                                 <td>{i.phone}</td>
                                                 <td>{i.birth.slice(0, 10)}</td>
                                                 <td>{i.adress}</td>
-                                                <td><button className="btn btn-success">Modifier</button> <button className="btn btn-warning">Supprimer</button></td>
+                                                <td> 
+                                                    { i.suspended == false ?
+                                                    <button onClick={() => editStat(i._id)} className="btn btn-primary">Activer</button> 
+                                                    : 
+                                                    <button onClick={() => editStat(i._id, i.suspended)} className="btn btn-warning">Désactiver</button>
+                                                    } <button className="btn btn-success">Modifier</button> <button onClick={() => deleteMod(i._id)} className="btn btn-danger">Supprimer</button>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>

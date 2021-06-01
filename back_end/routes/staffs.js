@@ -7,8 +7,8 @@ router.get("/all", access, staffCon.all)
 
 router.post("/add", access, staffCon.createOne)
 
-router.patch("/edit/:id", staffCon.edit)
+router.patch("/edit/:id", access, staffCon.edit)
 
-router.delete("/delete/:id", staffCon.deleteStaff)
+router.delete("/delete/:id", access, staffCon.deleteStaff)
 
 module.exports = router
