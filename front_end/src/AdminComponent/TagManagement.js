@@ -20,6 +20,11 @@ function TagManagement () {
         document.querySelector('#desc').value = ""
     }
 
+    // function resetEditedInputs () {
+    //     document.querySelector('#nm1').value = ""
+    //     document.querySelector('#desc1').value = ""
+    // }
+
     // render tags data :
     function renderTags () {
         fetch("http://localhost:3001/api/tags/all", {
@@ -52,6 +57,8 @@ function TagManagement () {
                 resetInputs()
                 renderTags()
             })
+            const html = `<div class="panel panel-success"><div class="panel-heading">Les Informations Sont Bien Insérer</div></div>`
+            document.getElementById('err').innerHTML = html
         } else {
             const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
             document.getElementById('err').innerHTML = html
@@ -100,9 +107,11 @@ function TagManagement () {
                     desc : currDesc
                 })
             }).then(res => {
-                resetInputs()
+                //resetEditedInputs()
                 renderTags()
             })
+            const html = `<div class="panel panel-success"><div class="panel-heading">Les Informations Sont Bien Modifier</div></div>`
+            document.getElementById('err1').innerHTML = html
         } else {
             const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
             document.getElementById('err1').innerHTML = html
@@ -146,7 +155,7 @@ function TagManagement () {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                            <button data-dismiss="modal" class="btn btn-theme" onClick={addNewTag} type="button">Ajouter</button>
+                                            <button class="btn btn-theme" onClick={addNewTag} type="button">Ajouter</button>
                                         </div>
                                         </div>
                                     </div>
@@ -196,7 +205,7 @@ function TagManagement () {
                                             </div>
                                             <div class="modal-footer" id="modifier">
                                                 <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                                <button data-dismiss="modal" class="btn btn-theme" id="btnmod" type="submit" onClick={()=>editTagData()}>Modifier</button>
+                                                <button class="btn btn-theme" id="btnmod" type="submit" onClick={()=>editTagData()}>Modifier</button>
                                             </div>
                                             </div>
                                         </div>

@@ -26,7 +26,14 @@ function ModManagement () {
 
     // clear Input function :
     function clearInputs () {
-        //document.querySelector('#fr').value = ""
+        document.getElementById('nm').value = ""
+        document.getElementById('pr').value = ""
+        document.getElementById('em').value = ""
+        document.getElementById('ad').value = ""
+        document.getElementById('ph').value = ""
+        document.getElementById('ps').value = ""
+        document.getElementById('gender').value = ""
+        document.getElementById('br').value = ""
     }
 
     // email and phone regex :
@@ -79,8 +86,8 @@ function ModManagement () {
                     clearInputs()
                     renderStaff()
                 })
-                // const html = `<div class="panel panel-success"><div class="panel-heading">Modérateur Bien Ajouter !!!</div></div>`
-                // document.getElementById('err').innerHTML = html
+                const html = `<div class="panel panel-success"><div class="panel-heading">Modérateur Bien Ajouter !!!</div></div>`
+                document.getElementById('err').innerHTML = html
             } else {
                 const html = `<div class="panel panel-danger"><div class="panel-heading">Y a Un Erreur En Email ou Téléphone !!!</div></div>`
                 document.getElementById('err').innerHTML = html
@@ -216,14 +223,14 @@ function ModManagement () {
                                             </div>
                                             <div className="group-control">
                                                 <p>Entrer Date de Naissance de Modérateur :</p>
-                                                <input onChange={event => setBirth(event.target.value)} type="date" name="em" autocomplete="off" class="form-control placeholder-no-fix" id="em"/>
+                                                <input onChange={event => setBirth(event.target.value)} type="date" name="em" autocomplete="off" class="form-control placeholder-no-fix" id="br"/>
                                             </div>
                                             <br/>
                                             <div id="err"></div>
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                            <button data-dismiss="modal" class="btn btn-theme" onClick={addMod} type="button">Ajouter</button>
+                                            <button class="btn btn-theme" onClick={addMod} type="button">Ajouter</button>
                                         </div>
                                         </div>
                                     </div>
