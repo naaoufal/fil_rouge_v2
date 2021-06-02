@@ -17,7 +17,7 @@ async function createOne (req, res) {
         firstname : req.body.firstname,
         lastname : req.body.lastname,
         gender : req.body.gender,
-        email : req.body.gender,
+        email : req.body.email,
         adress : req.body.adress,
         phone : req.body.phone,
         password : req.body.password,

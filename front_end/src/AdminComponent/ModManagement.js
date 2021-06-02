@@ -14,7 +14,7 @@ function ModManagement () {
     const [phone, setPhone] = useState([])
     const [password, setPassword] = useState([])
     const [birth, setBirth] = useState([])
-    const [id, setID] = useState("")
+    const [idStaff, setID] = useState("")
     // set Current values :
     const [currFirstname, setCurrFirstName] = useState([])
     const [currLastname, setCurrLastName] = useState([])
@@ -26,7 +26,7 @@ function ModManagement () {
 
     // clear Input function :
     function clearInputs () {
-        document.querySelector('#fr').value = ""
+        //document.querySelector('#fr').value = ""
     }
 
     // email and phone regex :
@@ -49,7 +49,6 @@ function ModManagement () {
     // add new staff :
     function addMod () {
         const em = document.querySelector('#em').value
-        const ph = document.querySelector('#ph').value
         const gender = document.querySelector('#gender').value
 
         // check if data fields not Empty !!! :
@@ -77,12 +76,9 @@ function ModManagement () {
                         suspended : false
                     })
                 }).then(res => {
-                    return res.json()
-                }).then(data => {
                     clearInputs()
-                    console.log(data)
+                    renderStaff()
                 })
-                window.location.reload()
                 // const html = `<div class="panel panel-success"><div class="panel-heading">Modérateur Bien Ajouter !!!</div></div>`
                 // document.getElementById('err').innerHTML = html
             } else {
@@ -93,6 +89,7 @@ function ModManagement () {
             const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
             document.getElementById('err').innerHTML = html
         }
+        renderStaff()
     }
 
     // edit account if suspended or NOT !! :
@@ -147,6 +144,17 @@ function ModManagement () {
                 }
             })
         })
+    }
+
+    function editStaffData () {
+        const gr = document.getElementById('gender1').value
+        //console.log(idStaff)
+        if(currFirstname && currLastname && currEmail && currAdress && currPhone && currPassword && currBirth && gr != ""){
+            // ###### put code for edit here !!!!
+        } else {
+            const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
+            document.getElementById('err1').innerHTML = html
+        }
     }
 
     useEffect(() => {
@@ -215,7 +223,7 @@ function ModManagement () {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                            <button class="btn btn-theme" onClick={addMod} type="button">Ajouter</button>
+                                            <button data-dismiss="modal" class="btn btn-theme" onClick={addMod} type="button">Ajouter</button>
                                         </div>
                                         </div>
                                     </div>
@@ -266,11 +274,11 @@ function ModManagement () {
                                                 <input onChange={event => setCurrBirth(event.target.value)} type="date" name="em" autocomplete="off" class="form-control placeholder-no-fix" id="br1"/>
                                             </div>
                                             <br/>
-                                            <div id="err"></div>
+                                            <div id="err1"></div>
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                            <button class="btn btn-theme" type="button">Modifier</button>
+                                            <button class="btn btn-theme" onClick={editStaffData} type="button">Modifier</button>
                                         </div>
                                         </div>
                                     </div>
@@ -285,7 +293,7 @@ function ModManagement () {
                                             <th>Prenom</th>
                                             <th>Sexe</th>
                                             <th>Email</th>
-                                            <th>Telephone</th>
+                                            <th>Téléphone</th>
                                             <th>Date de naissance</th>
                                             <th>Address</th>
                                             <th>Actions</th>
