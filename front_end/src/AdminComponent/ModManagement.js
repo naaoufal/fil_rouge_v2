@@ -14,6 +14,15 @@ function ModManagement () {
     const [phone, setPhone] = useState([])
     const [password, setPassword] = useState([])
     const [birth, setBirth] = useState([])
+    const [id, setID] = useState("")
+    // set Current values :
+    const [currFirstname, setCurrFirstName] = useState([])
+    const [currLastname, setCurrLastName] = useState([])
+    const [currEmail, setCurrEmail] = useState([])
+    const [currAdress, setCurrAdress] = useState([])
+    const [currPhone, setCurrPhone] = useState([])
+    const [currPassword, setCurrPassword] = useState([])
+    const [currBirth, setCurrBirth] = useState([])
 
     // clear Input function :
     function clearInputs () {
@@ -116,6 +125,30 @@ function ModManagement () {
         })
     }
 
+    // edit staff function : 
+    function editStaff (id) {
+        //console.log(id)
+        setID(id)
+        fetch("http://localhost:3001/api/staffs/all", {
+            headers : {
+                'Authorization' : 'Bearer ' + token
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            data.map(i => {
+                if(i._id == id) {
+                    document.getElementById('nm1').value = i.firstname
+                    document.getElementById('pr1').value = i.lastname
+                    document.getElementById('em1').value = i.email
+                    document.getElementById('ad1').value = i.adress
+                    document.getElementById('ph1').value = i.phone
+                    document.getElementById('ps1').value = i.password
+                }
+            })
+        })
+    }
+
     useEffect(() => {
         renderStaff()
     }, [])
@@ -138,7 +171,7 @@ function ModManagement () {
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Ajotuer Nouveau Tag</h4>
+                                            <h4 class="modal-title">Ajotuer Nouveau Modérateur</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div className="group-control">
@@ -188,6 +221,61 @@ function ModManagement () {
                                     </div>
                                 </div>
                                 {/* modal end */}
+                                {/* edit modal start */}
+                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="mymodal1" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Modifier Un Modérateur</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div className="group-control">
+                                                <p>Entrer Le nom de Modérateur :</p>
+                                                <input onChange={event => setCurrFirstName(event.target.value)} type="text" name="nm" autocomplete="off" class="form-control placeholder-no-fix" id="nm1"/>
+                                            </div>
+                                            <div className="group-control">
+                                                <p>Entrer Le Prenom de Modérateur :</p>
+                                                <input onChange={event => setCurrLastName(event.target.value)} type="text" name="pr" autocomplete="off" class="form-control placeholder-no-fix" id="pr1"/>
+                                            </div>
+                                            <div className="form-group">
+                                                <p>Choisir Votre Sexe :</p>
+                                                <select id="gender1" className="form-control">
+                                                    <option className="">Choisir Votre Sexe</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="male">Male</option>
+                                                </select>
+                                            </div>
+                                            <div className="group-control">
+                                                <p>Entrer Email de Modérateur :</p>
+                                                <input onChange={event => setCurrEmail(event.target.value)} type="email" name="em" autocomplete="off" class="form-control placeholder-no-fix" id="em1"/>
+                                            </div>
+                                            <div className="group-control">
+                                                <p>Entrer L'address de Modérateur :</p>
+                                                <input onChange={event => setCurrAdress(event.target.value)} type="text" name="ad" autocomplete="off" class="form-control placeholder-no-fix" id="ad1"/>
+                                            </div>
+                                            <div className="group-control">
+                                                <p>Entrer Téléphone de Modérateur :</p>
+                                                <input onChange={event => setCurrPhone(event.target.value)} type="text" name="ph" autocomplete="off" class="form-control placeholder-no-fix" id="ph1"/>
+                                            </div>
+                                            <div className="group-control">
+                                                <p>Entrer Mot de Passe de Modérateur :</p>
+                                                <input onChange={event => setCurrPassword(event.target.value)} type="password" name="ps" autocomplete="off" class="form-control placeholder-no-fix" id="ps1"/>
+                                            </div>
+                                            <div className="group-control">
+                                                <p>Entrer Date de Naissance de Modérateur :</p>
+                                                <input onChange={event => setCurrBirth(event.target.value)} type="date" name="em" autocomplete="off" class="form-control placeholder-no-fix" id="br1"/>
+                                            </div>
+                                            <br/>
+                                            <div id="err"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
+                                            <button class="btn btn-theme" type="button">Modifier</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* modal end */}
                                 <hr />
                                 <table class="table table-striped">
                                     <thead>
@@ -218,7 +306,7 @@ function ModManagement () {
                                                     <button onClick={() => editStat(i._id)} className="btn btn-primary">Activer</button> 
                                                     : 
                                                     <button onClick={() => editStat(i._id, i.suspended)} className="btn btn-warning">Désactiver</button>
-                                                    } <button className="btn btn-success">Modifier</button> <button onClick={() => deleteMod(i._id)} className="btn btn-danger">Supprimer</button>
+                                                    } <button className="btn btn-success" data-toggle="modal" href="#mymodal1" onClick={() => editStaff(i._id)}>Modifier</button> <button onClick={() => deleteMod(i._id)} className="btn btn-danger">Supprimer</button>
                                                 </td>
                                             </tr>
                                         ))}

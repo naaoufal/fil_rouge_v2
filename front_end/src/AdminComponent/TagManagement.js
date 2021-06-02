@@ -6,9 +6,10 @@ import './style/main.css'
 function TagManagement () {
 
     const token = localStorage.getItem('token')
-    const [name, setName] = useState([])
+    const [name, setName] = useState("")
     const [err, setError] = useState("")
-    const [desc, setDesc] = useState([])
+    const [idTag, setID] = useState("")
+    const [desc, setDesc] = useState("")
     const [tags, setTags] = useState([])
     const [currName, setCurrName] = useState("")
     const [currDesc, setCurrDesc] = useState("")
@@ -51,7 +52,6 @@ function TagManagement () {
                 resetInputs()
                 renderTags()
             })
-            window.location.reload()
         } else {
             const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
             document.getElementById('err').innerHTML = html
@@ -70,33 +70,43 @@ function TagManagement () {
 
     // edit a tag : 
     function editTag (id) {
-        console.log(id)
-        // if(name && desc) {
-        //     fetch(`http://localhost/3001/api/tags/edit/${id}`, {
-        //         method : 'PATCH',
-        //         headers : {
-        //             'Content-Type' : 'application/json',
-        //             'Authorization' : 'Bearer ' + token
-        //         },
-        //         body : JSON.stringify({
-        //             name : name,
-        //             desc : desc
-        //         })
-        //     }).then(res => {
-        //         resetInputs()
-        //         renderTags()
-        //     })
-        //     window.location.reload()
-        // } else {
-        //     const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
-        //     document.getElementById('err').innerHTML = html
-        // }
-        // renderTags()
-
+        setID(id)
+        fetch("http://localhost:3001/api/tags/all", {
+            headers : {
+                'Authorization' : 'Bearer ' + token
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            data.map(i => {
+                if(i._id == id) {
+                    document.getElementById('nm1').value = i.name
+                    document.getElementById('desc1').value = i.desc
+                }
+            })
+        })
     }
-    function test(){
-        let id = document.getElementById('full_id').value
-        console.log("working", id, currName && currName, currDesc && currDesc)
+    function editTagData(){
+        //console.log("working", idTag, currName, currDesc, name, desc)
+        if(idTag && currName && currDesc) {
+            fetch(`http://localhost:3001/api/tags/edit/${idTag}`, {
+                method : 'PATCH',
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Authorization' : 'Bearer ' + token
+                },
+                body : JSON.stringify({
+                    name : currName,
+                    desc : currDesc
+                })
+            }).then(res => {
+                resetInputs()
+                renderTags()
+            })
+        } else {
+            const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
+            document.getElementById('err1').innerHTML = html
+        }
     }
 
     useEffect(() => {
@@ -136,7 +146,7 @@ function TagManagement () {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                            <button class="btn btn-theme" onClick={addNewTag} type="button">Ajouter</button>
+                                            <button data-dismiss="modal" class="btn btn-theme" onClick={addNewTag} type="button">Ajouter</button>
                                         </div>
                                         </div>
                                     </div>
@@ -158,7 +168,7 @@ function TagManagement () {
                                                 <td>{i.name}</td>
                                                 <td>{i.desc}</td>
                                                 <td><button data-toggle="modal" href="#mymodal1" className="btn btn-success" onClick={() => editTag(i._id)}>Modifier</button> <button onClick={() => deleteTag(i._id)} className="btn btn-danger">Supprimer</button></td>
-                                                <input type="text" value={i._id} id="full_id"/>
+                                                {/* <input type="text" value={i._id} id="full_id"/> */}
                                             </tr>
                                         ))}
                                     </tbody>
@@ -174,21 +184,19 @@ function TagManagement () {
                                             <form>
                                                 <div className="group-control">
                                                     <p>Entrer Le Nom de Tag :</p>
-                                                    <input onChange={event => setCurrName(event.target.value)} type="text" name="nm1" autocomplete="off" class="form-control placeholder-no-fix" id="nm1"/>
+                                                    <input onChange={event => setCurrName(event.target.value)} type="text" name="nm1" class="form-control" id="nm1"/>
                                                 </div>
-                                                {currName}
                                                 <div className="group-control">
                                                     <p>Enter Description du Tag :</p>
                                                     <textarea onChange={event => setCurrDesc(event.target.value)} className="form-control" name="desc1" rows="8" cols="80" id="desc1"></textarea>
                                                 </div>
-                                                {currDesc}
                                                 <br/>
-                                                <div id="err"></div>
+                                                <div id="err1"></div>
                                             </form>
                                             </div>
                                             <div class="modal-footer" id="modifier">
                                                 <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                                <button class="btn btn-theme" id="btnmod" type="submit" onClick={()=>test()}>Modifier</button>
+                                                <button data-dismiss="modal" class="btn btn-theme" id="btnmod" type="submit" onClick={()=>editTagData()}>Modifier</button>
                                             </div>
                                             </div>
                                         </div>
