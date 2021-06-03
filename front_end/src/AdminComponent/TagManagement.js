@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 import Header from '../ClientComponent/Header';
 import SideBar from './SideBar';
-import './style/main.css'
+import './style/main.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 function TagManagement () {
+
+    // initialise toast config
+    toast.configure()
 
     const token = localStorage.getItem('token')
     const [name, setName] = useState("")
@@ -57,11 +62,17 @@ function TagManagement () {
                 resetInputs()
                 renderTags()
             })
-            const html = `<div class="panel panel-success"><div class="panel-heading">Les Informations Sont Bien Insérer</div></div>`
-            document.getElementById('err').innerHTML = html
+            toast.success("Les Informations Sont Bien Insérer", {
+                position : "bottom-right"
+            })
+            // const html = `<div class="panel panel-success"><div class="panel-heading">Les Informations Sont Bien Insérer</div></div>`
+            // document.getElementById('err').innerHTML = html
         } else {
-            const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
-            document.getElementById('err').innerHTML = html
+            toast.warning("Remplir les Inputs SVP !!!", {
+                position: "bottom-right"
+            })
+            // const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
+            // document.getElementById('err').innerHTML = html
         }
         renderTags()
     }
@@ -72,6 +83,9 @@ function TagManagement () {
             method : 'DELETE'
         }).then(res => {
             renderTags()
+            toast.warning("Tag Est Supprimer !!!", {
+                position: "bottom-right"
+            })
         })
     }
 
@@ -110,11 +124,17 @@ function TagManagement () {
                 //resetEditedInputs()
                 renderTags()
             })
-            const html = `<div class="panel panel-success"><div class="panel-heading">Les Informations Sont Bien Modifier</div></div>`
-            document.getElementById('err1').innerHTML = html
+            toast.success("Les Informations Sont Bien Modifier", {
+                position : "bottom-right"
+            })
+            // const html = `<div class="panel panel-success"><div class="panel-heading">Les Informations Sont Bien Modifier</div></div>`
+            // document.getElementById('err1').innerHTML = html
         } else {
-            const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
-            document.getElementById('err1').innerHTML = html
+            toast.warning("Remplir les Inputs SVP !!!", {
+                position : "bottom-right"
+            })
+            // const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
+            // document.getElementById('err1').innerHTML = html
         }
     }
 

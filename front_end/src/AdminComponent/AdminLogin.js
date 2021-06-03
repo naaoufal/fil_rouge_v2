@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { toast, ToastContainer, Zoom } from "react-toastify"
 import { useHistory } from "react-router-dom"
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminLogin () {
 
