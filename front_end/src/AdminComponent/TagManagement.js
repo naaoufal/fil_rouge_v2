@@ -135,11 +135,11 @@ function TagManagement () {
             <SideBar />
             <section id="main-content">
                 <section className="wrapper">
-                    <h3><i className="fa fa-angle-right"></i>Dashboard</h3>
+                    <h3><i className="fa fa-angle-right"></i> Gestion des Tags et Themes</h3>
                     <div className="row">
                         <div class="col-md-12">
                             <div class="content-panel">
-                                <h4><i class="fa fa-angle-right"></i> Gestion des Tags et Themes</h4>
+                                {/* <h4><i class="fa fa-angle-right"></i> Gestion des Tags et Themes</h4> */}
                                 <a className="btn btn-primary" id="add" data-toggle="modal" href="#myModal">Ajouter Nouveau Tag</a>
                                 {/* modal start */}
                                 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
