@@ -2,8 +2,13 @@ import { deleteModel } from 'mongoose';
 import { useEffect, useState } from 'react';
 import Header from '../ClientComponent/Header';
 import SideBar from './SideBar';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 function ModManagement () {
+
+    // initialise toast config
+    toast.configure()
 
     const token = localStorage.getItem('token')
     const [staffs, setStaffs] = useState([])
@@ -16,13 +21,13 @@ function ModManagement () {
     const [birth, setBirth] = useState([])
     const [idStaff, setID] = useState("")
     // set Current values :
-    const [currFirstname, setCurrFirstName] = useState([])
-    const [currLastname, setCurrLastName] = useState([])
-    const [currEmail, setCurrEmail] = useState([])
-    const [currAdress, setCurrAdress] = useState([])
-    const [currPhone, setCurrPhone] = useState([])
-    const [currPassword, setCurrPassword] = useState([])
-    const [currBirth, setCurrBirth] = useState([])
+    const [currFirstname, setCurrFirstName] = useState("")
+    const [currLastname, setCurrLastName] = useState("")
+    const [currEmail, setCurrEmail] = useState("")
+    const [currAdress, setCurrAdress] = useState("")
+    const [currPhone, setCurrPhone] = useState("")
+    const [currPassword, setCurrPassword] = useState("")
+    const [currBirth, setCurrBirth] = useState("")
 
     // clear Input function :
     function clearInputs () {
@@ -86,15 +91,18 @@ function ModManagement () {
                     clearInputs()
                     renderStaff()
                 })
-                const html = `<div class="panel panel-success"><div class="panel-heading">Modérateur Bien Ajouter !!!</div></div>`
-                document.getElementById('err').innerHTML = html
+                toast.success("Modérateur Bien Ajouter !!!", {
+                    position : "bottom-right"
+                })
             } else {
-                const html = `<div class="panel panel-danger"><div class="panel-heading">Y a Un Erreur En Email ou Téléphone !!!</div></div>`
-                document.getElementById('err').innerHTML = html
+                toast.warning("Y a Un Erreur En Email ou Téléphone !!!", {
+                    position : "bottom-right"
+                })
             }
         } else {
-            const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
-            document.getElementById('err').innerHTML = html
+            toast.warning("Remplir les Inputs SVP !!!", {
+                position : "bottom-right"
+            })
         }
         renderStaff()
     }
@@ -113,6 +121,9 @@ function ModManagement () {
             })
         }).then(res => {
             renderStaff()
+            toast.dark("Status a Bien Modifier ", {
+                position : "bottom-right"
+            })
         })
     }
 
@@ -126,6 +137,9 @@ function ModManagement () {
             }
         }).then(res => {
             renderStaff()
+            toast.error("Modérateur Est Bien Supprimer !!!", {
+                position: "bottom-right"
+            })
         })
     }
 
@@ -155,12 +169,40 @@ function ModManagement () {
 
     function editStaffData () {
         const gr = document.getElementById('gender1').value
-        //console.log(idStaff)
-        if(currFirstname && currLastname && currEmail && currAdress && currPhone && currPassword && currBirth && gr != ""){
-            // ###### put code for edit here !!!!
+        //console.log(idStaff, currFirstname, currLastname, gr, currEmail, currAdress, currPhone, currPassword, currBirth)
+        if(currFirstname && currLastname && currEmail && currAdress && currPhone && currPassword && currBirth != ""){
+            if(currEmail.match(mailformat) && currPhone.match(phoneformat)) {
+                fetch(`http://localhost:3001/api/staffs/edit/${idStaff}`, {
+                    method : 'PATCH',
+                    headers : {
+                        'Content-Type' : 'application/json',
+                        'Authorization' : 'Bearer ' + token
+                    },
+                    body : JSON.stringify({
+                        firstname : currFirstname,
+                        lastname : currLastname,
+                        gender : gr,
+                        email : currEmail,
+                        adress : currAdress,
+                        phone : currPhone,
+                        password : currPassword,
+                        birth : currBirth
+                    })
+                }).then(res => {
+                    renderStaff()
+                })
+                toast.success("Les Informations Sont Bien Modifier", {
+                    position : "bottom-right"
+                })
+            } else {
+                toast.warning("Y a Un Erreur En Email ou Téléphone !!!", {
+                    position : "bottom-right"
+                })
+            }
         } else {
-            const html = `<div class="panel panel-danger"><div class="panel-heading">Remplir les Inputs SVP !!!</div></div>`
-            document.getElementById('err1').innerHTML = html
+            toast.warning("Remplir les Inputs SVP !!!", {
+                position : "bottom-right"
+            })
         }
     }
 
@@ -230,7 +272,7 @@ function ModManagement () {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                            <button class="btn btn-theme" onClick={addMod} type="button">Ajouter</button>
+                                            <button data-dismiss="modal" class="btn btn-theme" onClick={addMod} type="button">Ajouter</button>
                                         </div>
                                         </div>
                                     </div>
@@ -285,7 +327,7 @@ function ModManagement () {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                                            <button class="btn btn-theme" onClick={editStaffData} type="button">Modifier</button>
+                                            <button data-dismiss="modal" class="btn btn-theme" onClick={editStaffData} type="button">Modifier</button>
                                         </div>
                                         </div>
                                     </div>

@@ -31,6 +31,24 @@ async function createOne (req, res) {
     }
 }
 
+// Edit an admin :
+async function edit (req, res) {
+    if(!req.body){
+        return res.send({message : "they is not data !!!"})
+    }
+    const id = req.params.id
+    Admin.findByIdAndUpdate(id, req.body, { useFindAndModify: false }).then(data => {
+        //console.log(data.email)
+        if (!data) {
+            res.send({
+              message: `they is no tag !`
+            });
+          } else {
+            res.send({ message: "tag is updated successfully." })
+          }
+    })
+}
+
 async function login (req, res, next) {
     const {email, password} = req.body
     Admin.findOne({
@@ -55,5 +73,6 @@ async function login (req, res, next) {
 module.exports = {
     all,
     createOne,
-    login
+    login,
+    edit
 }

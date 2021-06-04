@@ -74,7 +74,7 @@ function TagManagement () {
             method : 'DELETE'
         }).then(res => {
             renderTags()
-            toast.warning("Tag Est Supprimer !!!", {
+            toast.error("Tag Est Bien Supprimer !!!", {
                 position: "bottom-right"
             })
         })
