@@ -9,18 +9,18 @@ function SideBar () {
     const token = localStorage.getItem('token')
     const info = JSON.parse(localStorage.getItem('adminInfo'))
 
-    if(token) {
-        // put some code here
-    } else {
-        history.push("/AdminLogin")
-    }
+    // if(token) {
+    //     // put some code here
+    // } else {
+    //     history.push("/AdminLogin")
+    // }
 
     return (
         <aside>
             <div id="sidebar" class="nav-collapse">
                 <ul class="sidebar-menu" id="nav-accordion">
                 <p class="centered"><Link><img src="" class="img-circle" width="80" /></Link></p>
-                <h5 class="centered">{info.firstname} {info.lastname}</h5>
+                {/* <h5 class="centered">{info.firstname} {info.lastname}</h5> */}
                 <br /> <br />
                     <li>
                         <Link to="/AdminDashboard">

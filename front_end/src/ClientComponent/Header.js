@@ -9,28 +9,23 @@ function Header () {
     let history = useHistory()
 
     // check if token exist:
-    const token = localStorage.getItem('token')
-    if(token) {
-        //console.log("this is work")
-    } else {
-        history.push("/AdminLogin")
-    }
+    //const token = localStorage.getItem('token')
 
     // call information of admin:
-    const info = JSON.parse(localStorage.getItem('adminInfo'))
+    //const info = JSON.parse(localStorage.getItem('adminInfo'))
 
     // logout function:
     function logOut () {
         localStorage.clear()
         toast.configure()
-        toast.warning("Vous etes Deconnecter " + info.firstname)
-        history.push("/AdminLogin")
+        //toast.warning("Vous etes Deconnecter " + info.firstname)
+        history.push("/")
     }
 
     return (
         <header className="header black-bg">
             <div class="sidebar-toggle-box">
-                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                {/* <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div> */}
             </div>
             <Link class="logo"><b>You<span>Forum</span></b></Link>
             <div class="top-menu">

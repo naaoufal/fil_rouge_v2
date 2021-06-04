@@ -1,6 +1,7 @@
 import Header from '../ClientComponent/Header';
 import { Link, useHistory } from "react-router-dom";
 import SideBar from './SideBar';
+import { useEffect } from 'react';
 
 function ContManagement () {
     // init history
@@ -18,12 +19,14 @@ function ContManagement () {
         
     }
 
-    if(token) {
-        // put some code here !!
-        renderContactData()
-    } else {
-        history.push("/AdminLogin")
-    }
+    useEffect(() => {
+        // if(token) {
+        //     // put some code here !!
+        //     renderContactData()
+        // } else {
+        //     history.push("/AdminLogin")
+        // }
+    }, [])
 
     return (
         <section id="container">
