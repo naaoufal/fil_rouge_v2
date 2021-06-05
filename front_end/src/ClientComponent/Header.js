@@ -9,7 +9,7 @@ function Header () {
     let history = useHistory()
 
     // check if token exist:
-    //const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token')
 
     // call information of admin:
     //const info = JSON.parse(localStorage.getItem('adminInfo'))
@@ -30,7 +30,11 @@ function Header () {
             <Link class="logo"><b>You<span>Forum</span></b></Link>
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
+                    {token != "" ?
+                    <li><Link class="logout">Connecter</Link></li> 
+                    :
                     <li><Link onClick={logOut} class="logout">Se Deconnecter</Link></li>
+                }
                 </ul>
             </div>
         </header>
