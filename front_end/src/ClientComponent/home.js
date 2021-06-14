@@ -28,13 +28,21 @@ function UserHome () {
                                         </div>
                                         <div class="modal-body">
                                             <div className="group-control">
-                                                <label>Ecrire ton Problème ...</label>
+                                                <label>Ecrire Votre Question :</label>
                                                 <textarea class="form-control placeholder-no-fix"></textarea>
+                                            </div>
+                                            <div className="group-control">
+                                                <label>Choisir Votre Tag :</label>
+                                                <select className="form-control">
+                                                    <option className="">Selecionner Votre Tag ...</option>
+                                                    <option className="">Tag1</option>
+                                                    <option className="">Tag2</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-theme">Save changes</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                            <button type="button" class="btn btn-theme">Poser</button>
                                         </div>
                                         </div>
                                     </div>
