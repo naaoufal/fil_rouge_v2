@@ -1,6 +1,26 @@
+import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Header from './Header'
 
 function UserHome () {
+
+    let history = useHistory()
+    const [tags, setTags] = useState([])
+
+    // function render tag data :
+    function renderTagsData () {
+        fetch("http://localhost:3001/api/tags/publicTags").then(res => {
+            return res.json()
+        }).then(data => {
+            setTags(data)
+        })
+    }
+
+    // render function when component loaded :
+    useEffect(() => {
+        renderTagsData()
+    }, [])
+
     return (
         <section id="container">
             <Header />
@@ -36,8 +56,9 @@ function UserHome () {
                                                 {/* <label>Choisir Votre Tag :</label> */}
                                                 <select className="form-control placeholder-no-fix">
                                                     <option className="">Selecionner Votre Tag ...</option>
-                                                    <option className="">Tag1</option>
-                                                    <option className="">Tag2</option>
+                                                    {tags.map(i => (
+                                                        <option>{i.name}</option>
+                                                    ))}
                                                 </select>
                                             </div>
                                         </div>

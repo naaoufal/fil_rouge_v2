@@ -5,6 +5,8 @@ const access = require('../midllewares/authAdmin')
 
 router.get("/all", access, tagCon.all)
 
+router.get("/publicTags", tagCon.allTags)
+
 router.post("/add", access, tagCon.createOne)
 
 router.patch("/edit/:id", tagCon.edit)

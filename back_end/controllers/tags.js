@@ -11,6 +11,18 @@ async function all (req, res) {
     }
 }
 
+// get all tags for public api :
+async function allTags (req, res) {
+    try {
+        const tags = await Tags.find()
+        res.json(tags)
+    } catch (error) {
+        res.json({
+            message : error.message
+        })
+    }
+}
+
 // Create new tag:
 async function createOne (req, res) {
     const tag = new Tags({
@@ -54,5 +66,6 @@ module.exports = {
     all,
     createOne,
     edit,
-    deleteTag
+    deleteTag,
+    allTags
 }
