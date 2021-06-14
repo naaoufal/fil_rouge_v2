@@ -28,12 +28,13 @@ function UserHome () {
                                         </div>
                                         <div class="modal-body">
                                             <div className="group-control">
-                                                <label>Ecrire Votre Question :</label>
-                                                <textarea class="form-control placeholder-no-fix"></textarea>
+                                                {/* <label>Ecrire Votre Question :</label> */}
+                                                <textarea placeholder="Ecrire Votre Question Ou Problème :" rows="10" cols="50" class="form-control placeholder-no-fix"></textarea>
                                             </div>
-                                            <div className="group-control">
-                                                <label>Choisir Votre Tag :</label>
-                                                <select className="form-control">
+                                            <br />
+                                            <div className="group-contro">
+                                                {/* <label>Choisir Votre Tag :</label> */}
+                                                <select className="form-control placeholder-no-fix">
                                                     <option className="">Selecionner Votre Tag ...</option>
                                                     <option className="">Tag1</option>
                                                     <option className="">Tag2</option>

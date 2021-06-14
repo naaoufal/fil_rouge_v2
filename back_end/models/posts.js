@@ -18,6 +18,10 @@ const postsSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+    stat_post : {
+        type : String,
+        required : true
+    },
     createdAt : {
         type : Date,
         required : true
