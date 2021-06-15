@@ -3,12 +3,32 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const nodemailer = require('nodemailer')
 
+
 // get all Clients :
 async function all (req, res) {
     try {
-        const client = await Client.find()
+        const clients = await Client.find()
+        res.json(clients)
     } catch (error) {
         res.json({message : error.message})
+    }
+}
+
+async function findClient (req, res) {
+    try {
+        const em = req.body.email
+        const ps = req.body.password
+        const client = await Client.findOne({
+            email : em,
+            password : ps
+        })
+        if(client) {
+            res.json(client)
+        } else {
+            res.json({message : "User Not Found !!!"})
+        }
+    } catch (error) {
+        res.json({message : message.error})
     }
 }
 
@@ -27,11 +47,25 @@ async function createOne (req, res) {
         suspended : req.body.suspended
     })
     try {
-        const newClient = await client.save()
-        res.json(newClient)
+        const test = await Client.find({
+            email : client.email
+        })
+        if(test.length > 0) {
+            res.json({message : "Email Already Used !!"})
+        } else {
+            const newClient = await client.save()
+            res.json(newClient)
+        }
     } catch (err) {
         res.json({message : err.message})
     }
+}
+
+// delete client :
+async function deleteClient (req, res) {
+    Client.findByIdAndDelete(req.params.id).then( () => {
+        res.json({message : "Client Deleted Successfuly"})
+    })
 }
 
 // auth a client (Json Web Token) :
@@ -58,5 +92,7 @@ async function login (req, res, next) {
 module.exports = {
     all,
     login,
-    createOne
+    createOne,
+    findClient,
+    deleteClient
 }
