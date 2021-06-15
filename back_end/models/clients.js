@@ -1,26 +1,30 @@
 const mongoose = require('mongoose')
 
-const adminSchema = new mongoose.Schema({
+const clientSchema = new mongoose.Schema({
 
     firstname : {
         type : String,
-        required : true,
+        required : true
     },
     lastname : {
         type : String,
-        required : true,
+        required : true
+    },
+    image : {
+        type : String,
+        required : true
     },
     gender : {
         type : String,
-        required : true,
+        required : true
     },
     email : {
         type : String,
-        required : true,
+        required : true
     },
     adress : {
         type : String,
-        required : true,
+        required : true
     },
     phone : {
         type : Number,
@@ -29,8 +33,16 @@ const adminSchema = new mongoose.Schema({
     password : {
         type : String,
         required : true
+    },
+    is_valid : {
+        type : Boolean,
+        required : true
+    },
+    suspended : {
+        type : Boolean,
+        required : true
     }
 
 })
 
-module.exports = mongoose.model('admins', adminSchema)
+module.exports = mongoose.model('clients', clientSchema)

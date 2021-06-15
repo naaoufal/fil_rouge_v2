@@ -41,14 +41,15 @@ async function edit (req, res) {
         //console.log(data.email)
         if (!data) {
             res.send({
-              message: `they is no tag !`
+              message: `they is no admin !`
             });
           } else {
-            res.send({ message: "tag is updated successfully." })
+            res.send({ message: "admin is updated successfully." })
           }
     })
 }
 
+// auth an admin (Json Web Token) :
 async function login (req, res, next) {
     const {email, password} = req.body
     Admin.findOne({
