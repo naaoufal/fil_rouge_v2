@@ -17,6 +17,7 @@ app.use("/api/admins", require("./back_end/routes/admins"))
 app.use("/api/tags", require("./back_end/routes/tags"))
 app.use("/api/staffs", require("./back_end/routes/staffs"))
 app.use("/api/clients", require("./back_end/routes/clients"))
+app.use("/api/posts", require("./back_end/routes/posts"))
 
 
 // start the server

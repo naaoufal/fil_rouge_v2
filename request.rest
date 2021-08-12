@@ -32,3 +32,17 @@ Authorization : bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGVtYWlsIjoibmFv
 ###
 
 GET http://localhost:3001/api/tags/publicTags
+
+###
+
+POST http://localhost:3001/api/posts/add
+Content-Type: application/json
+
+{
+    "title" : "test",
+    "desc" : "this desc for test",
+    "user_id" : "user1",
+    "is_valid" : false,
+    "stat_post" : "résolu",
+    "createdAt" : "12/08/2021"
+}

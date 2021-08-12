@@ -25,6 +25,10 @@ const postsSchema = new mongoose.Schema({
     createdAt : {
         type : Date,
         required : true
+    },
+    tag : {
+        type : String,
+        required : true
     }
 
 })
