@@ -9,18 +9,20 @@ function Header () {
     let history = useHistory()
 
     // check if token exist:
-    const token = localStorage.getItem('token')
+    const token = sessionStorage.getItem('token')
 
     // call information of admin:
     //const info = JSON.parse(localStorage.getItem('adminInfo'))
 
     // logout function:
     function logOut () {
-        localStorage.clear()
+        sessionStorage.clear()
         toast.configure()
-        //toast.warning("Vous etes Deconnecter " + info.firstname)
+        toast.warning("Vous etes Deconnecter")
         history.push("/")
     }
+
+    //console.log(token)
 
     return (
         <header className="header black-bg">
@@ -30,8 +32,8 @@ function Header () {
             <Link class="logo"><b>You<span>Forum</span></b></Link>
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
-                    {token != "" ?
-                    <li><Link class="logout">Connecter</Link></li> 
+                    {!token ?
+                    <li><Link data-toggle="modal" data-target="#sign" class="logout">Connecter</Link></li> 
                     :
                     <li><Link onClick={logOut} class="logout">Se Deconnecter</Link></li>
                 }

@@ -1,14 +1,28 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { toast, ToastContainer, Zoom } from "react-toastify"
 import Header from './Header'
+import ModalConn from './Modals/ModalConn'
+import './styles/index.css'
 
 function UserHome () {
 
     let history = useHistory()
+    // initialise toast config
+    toast.configure()
+    // init token
+    const token = sessionStorage.getItem('token')
+    //const info = JSON.parse(localStorage.getItem('userInfo'))
     const [tags, setTags] = useState([])
+    const [posts, setPosts] = useState([])
+    
+    // states for posts :
+    const [titlePost, setTitlePost] = useState("")
+    const [descPost, setDescPost] = useState("")
+    const [tagPost, setTagPost] = useState("")
 
     // function render tag data :
-    function renderTagsData () {
+    const renderTagsData = () => {
         fetch("http://localhost:3001/api/tags/publicTags").then(res => {
             return res.json()
         }).then(data => {
@@ -16,9 +30,51 @@ function UserHome () {
         })
     }
 
+    // function render post data :
+    const renderPostsData = () => {
+        fetch("http://localhost:3001/api/posts/all").then(res => {
+            return res.json()
+        }).then(data => {
+            setPosts(data)
+        })
+    }
+
+    
+    
+
+    // function to add posts :
+    const addPost = () => {
+        //console.log(titlePost, descPost, tagPost)
+        fetch("http://localhost:3001/api/posts/add", {
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({
+                title : titlePost,
+                desc : descPost,
+                user_id : "Test_for_mement",
+                is_valid : false,
+                stat_post : "Pending",
+                createdAt : Date.now(),
+                tag : tagPost
+            })
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            if(data) {
+                window.location.reload()
+            } else {
+                toast.error("Y a une Erreur Vérifier Vos Données")
+            }
+        })
+    }
+
     // render function when component loaded :
     useEffect(() => {
         renderTagsData()
+        renderPostsData()
+        //console.log(token)
     }, [])
 
     return (
@@ -35,26 +91,30 @@ function UserHome () {
                                 </form>
                             </div>
                             <div className="room-desk">
-                                <button data-toggle="modal" data-target="#exampleModal" class="pull-right btn btn-theme">Poser Une Question</button>
+                                <button data-toggle="modal" data-target={!token ? "#sign" : "#exampleModal"} class="pull-right btn btn-theme">Poser Une Question</button>
                                 {/* modal start */}
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Ajouter Nouvel Post</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                                <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
                                             <div className="group-control">
+                                                <input onChange={event => setTitlePost(event.target.value)} placeholder="Entrer Votre Problème" className="form-control placeholde-no-fix" />
+                                            </div>
+                                            <br />
+                                            <div className="group-control">
                                                 {/* <label>Ecrire Votre Question :</label> */}
-                                                <textarea placeholder="Ecrire Votre Question Ou Problème :" rows="10" cols="50" class="form-control placeholder-no-fix"></textarea>
+                                                <textarea onChange={event => setDescPost(event.target.value)} placeholder="Expliquer Votre Problème :" rows="10" cols="50" class="form-control placeholder-no-fix"></textarea>
                                             </div>
                                             <br />
                                             <div className="group-contro">
                                                 {/* <label>Choisir Votre Tag :</label> */}
-                                                <select className="form-control placeholder-no-fix">
+                                                <select id="sel" onChange={event => setTagPost(event.target.value)} className="form-control placeholder-no-fix">
                                                     <option className="">Selecionner Votre Tag ...</option>
                                                     {tags.map(i => (
                                                         <option>{i.name}</option>
@@ -64,27 +124,20 @@ function UserHome () {
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                            <button type="button" class="btn btn-theme">Poser</button>
+                                            <button type="button" class="btn btn-theme" onClick={addPost}>Poser</button>
                                         </div>
                                         </div>
                                     </div>
                                 </div>
                                 {/* modal end */}
-                                <div class="room-box">
-                                    <h5 class="text-primary"><a href="">Dashboard</a></h5>
-                                    <p>We talk here about our dashboard. No support given.</p>
-                                    <p><span class="text-muted">Admin :</span> Sam Soffes | <span class="text-muted">Members :</span> 98 | <span class="text-muted">Last Activity :</span> 2 min ago</p>
-                                </div>
-                                <div class="room-box">
-                                    <h5 class="text-primary"><a href="">Dashboard</a></h5>
-                                    <p>We talk here about our dashboard. No support given.</p>
-                                    <p><span class="text-muted">Admin :</span> Sam Soffes | <span class="text-muted">Members :</span> 98 | <span class="text-muted">Last Activity :</span> 2 min ago</p>
-                                </div>
-                                <div class="room-box">
-                                    <h5 class="text-primary"><a href="">Dashboard</a></h5>
-                                    <p>We talk here about our dashboard. No support given.</p>
-                                    <p><span class="text-muted">Admin :</span> Sam Soffes | <span class="text-muted">Members :</span> 98 | <span class="text-muted">Last Activity :</span> 2 min ago</p>
-                                </div>
+                                <ModalConn />
+                                {posts.map((i) => (
+                                    <div class="room-box">
+                                        <h5 class="text-primary"><a href="">{i.title}</a></h5>
+                                        <p>{i.desc}</p>
+                                        <p><span class="text-muted">Posté Par :</span> {i.user_id} | <span class="text-muted">Tag Mentionner :</span> {i.tag} | <span class="text-muted">Status :</span> {i.stat_post} | <span class="text-muted">Posté en :</span> {i.createdAt}</p>
+                                    </div>
+                                ))}
                             </div>
                         </aside>
                     </div>

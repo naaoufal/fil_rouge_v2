@@ -35,16 +35,28 @@ GET http://localhost:3001/api/tags/publicTags
 
 ###
 
+<<<<<<< HEAD
 GET http://localhost:3001/api/posts/all
 
 ###
 POST http://localhost:3001/api/posts/addOne
+=======
+POST http://localhost:3001/api/posts/add
+>>>>>>> 725a52fe336bd7c3470508646ae5cfa4df315205
 Content-Type: application/json
 
 {
     "title" : "test",
+<<<<<<< HEAD
     "desc" : "this is desc",
     "user_id" : "123abc",
     "is_valid" : false,
     "stat_post" : "Résolu"
+=======
+    "desc" : "this desc for test",
+    "user_id" : "user1",
+    "is_valid" : false,
+    "stat_post" : "résolu",
+    "createdAt" : "12/08/2021"
+>>>>>>> 725a52fe336bd7c3470508646ae5cfa4df315205
 }
