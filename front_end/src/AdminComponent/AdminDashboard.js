@@ -61,7 +61,7 @@ function AdminDashboard () {
                                 </div>
                                 <div className="col-md-4 centered">
                                     <div class="profile-pic">
-                                        <p><img src="img/ui-sam.jpg" class="img-circle" /></p>
+                                        <p><img src="" class="img-circle" /></p>
                                         <p>
                                             <button class="btn btn-theme"><i class="fa fa-check"></i> Follow</button>
                                             <button class="btn btn-theme02">Add</button>

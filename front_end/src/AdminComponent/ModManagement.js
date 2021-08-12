@@ -1,9 +1,9 @@
-import { deleteModel } from 'mongoose';
 import { useEffect, useState } from 'react';
 import Header from '../ClientComponent/Header';
 import SideBar from './SideBar';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { useHistory, Link } from 'react-router-dom';
 
 function ModManagement () {
 
@@ -206,14 +206,43 @@ function ModManagement () {
         }
     }
 
+    // init history:
+    let history = useHistory()
+    
+    const info = JSON.parse(localStorage.getItem('adminInfo'))
+    const [admin, setAdmin] = useState([])
+    //console.log(token)
+
+    // logout function
+    function logOut () {
+        localStorage.clear()
+        toast.configure()
+        toast.warning("Vous etes Deconnecter " + info.firstname)
+        history.push("/AdminLogin")
+    }
+
     useEffect(() => {
-        renderStaff()
+        if(token) {
+            renderStaff()
+        } else {
+            history.push("/AdminLogin")
+        }
     }, [])
 
 
     return (
         <section id="container">
-            <Header />
+            <header className="header black-bg">
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+                </div>
+                <Link class="logo"><b>You<span>Forum</span></b></Link>
+                <div class="top-menu">
+                    <ul class="nav pull-right top-menu">
+                        <li><Link onClick={logOut} class="logout">Se Deconnecter</Link></li>
+                    </ul>
+                </div>
+            </header>
             <SideBar />
             <section id="main-content">
                 <section className="wrapper">

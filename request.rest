@@ -10,7 +10,7 @@ Content-Type: application/json
     "firstname" : "naoufal",
     "lastname" : "benmansour",
     "gender" : "mâle",
-    "email" : "naoufelbenmensour@gmail.com",
+    "email" : "test@gmail.com",
     "adress" : "Lotissement X rue X",
     "phone" : 614675855,
     "password" : "azer"
@@ -21,7 +21,7 @@ POST http://localhost:3001/api/admins/Auth
 Content-Type: application/json
 
 {
-    "email" : "naoufelbenmensour@gmail.com",
+    "email" : "test@gmail.com",
     "password" : "azer"
 }
 
@@ -32,3 +32,19 @@ Authorization : bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZGVtYWlsIjoibmFv
 ###
 
 GET http://localhost:3001/api/tags/publicTags
+
+###
+
+GET http://localhost:3001/api/posts/all
+
+###
+POST http://localhost:3001/api/posts/addOne
+Content-Type: application/json
+
+{
+    "title" : "test",
+    "desc" : "this is desc",
+    "user_id" : "123abc",
+    "is_valid" : false,
+    "stat_post" : "Résolu"
+}

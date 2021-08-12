@@ -20,12 +20,12 @@ function ContManagement () {
     }
 
     useEffect(() => {
-        // if(token) {
-        //     // put some code here !!
-        //     renderContactData()
-        // } else {
-        //     history.push("/AdminLogin")
-        // }
+        if(token) {
+            // put some code here !!
+            // renderContactData()
+        } else {
+            history.push("/AdminLogin")
+        }
     }, [])
 
     return (
