@@ -12,9 +12,12 @@ function StaffLogin () {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
-    useEffect(() => {
+    // initialise toast config
+    toast.configure()
 
-    })
+    const logIn = () => {
+        console.log(email, password)
+    }
 
     return (
         <div id="login-page">
@@ -46,7 +49,7 @@ function StaffLogin () {
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
-                        <button class="btn btn-theme" type="button">Valider</button>
+                        <button class="btn btn-theme" type="button" onClick={logIn}>Valider</button>
                     </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ function AdminLogin () {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
-    function Admin () {
+    const Admin = () => {
 
         // initialise toast config
         toast.configure()

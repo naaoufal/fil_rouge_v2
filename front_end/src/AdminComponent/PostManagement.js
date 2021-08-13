@@ -19,19 +19,30 @@ function PostManagement () {
     const token = localStorage.getItem('token')
     const info = JSON.parse(localStorage.getItem('adminInfo'))
     const [admin, setAdmin] = useState([])
+    const [posts, setPosts] = useState([])
 
     // logout function
     function logOut () {
         localStorage.clear()
         toast.configure()
-        toast.warning("Vous etes Deconnecter " + info.firstname)
+        toast.warning("Vous etes Deconnecter")
         history.push("/AdminLogin")
+    }
+
+    // function to render Posts data :
+    const renderPosts = () => {
+        fetch("http://localhost:3001/api/posts/all").then(res => {
+            return res.json()
+        }).then(data => {
+            setPosts(data)
+        })
     }
 
     useEffect(() => {
         // check if token exist or not:
         if(token) {
-            console.log(info)
+            //console.log(info)
+            renderPosts()
         } else {
             history.push("/AdminLogin")
         }
@@ -58,9 +69,9 @@ function PostManagement () {
                         <div class="col-md-12">
                             <div class="content-panel">
                                 {/* <h4><i class="fa fa-angle-right"></i> Gestion des Tags et Themes</h4> */}
-                                <a className="btn btn-primary" id="add" data-toggle="modal" href="#myModal">Ajouter Nouveau Tag</a>
+                                {/* <a className="btn btn-primary" id="add" data-toggle="modal" href="#myModal">Ajouter Nouveau Tag</a> */}
                                 {/* modal start */}
-                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                                {/* <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                         <div class="modal-header">
@@ -79,12 +90,12 @@ function PostManagement () {
                                             <div id="err"></div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button>
+                                            <button data-dismiss="modal" class="btn btn-default" type="button">Retour</button> */}
                                             {/* <button data-dismiss="modal" class="btn btn-theme" onClick={addNewPost} type="button">Ajouter</button> */}
-                                        </div>
+                                        {/* </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 {/* modal end */}
                                 
                                 <hr />
@@ -92,14 +103,28 @@ function PostManagement () {
                                     <thead>
                                         <tr>
                                             <th>Nom du Tag</th>
-                                            <th>Description du Tag</th>
-                                            <th>Actions</th>
+                                            <th>CreatedAt</th>
+                                            <th>Post Valider/Non</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="modifier">
-                                        <tr>
-                                            <td>data</td>
-                                        </tr>
+                                        {posts.map((i) => (
+                                            <tr key={i._id}>
+                                                <td>{i.title}</td>
+                                                <td>{i.createdAt}</td>
+                                                {i.is_valid == false ?
+                                                <td>
+                                                    <button className="btn btn-danger">Valider</button>
+                                                </td> 
+                                                : 
+                                                <td>
+                                                    <button className="btn btn-danger">De-Valider</button>
+                                                </td>
+                                                }
+                                                <td>{i.stat_post}</td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                     {/* modal start */}
                                     <div aria-hidden="true" aria-labelledby="myModalLabel1" role="dialog" tabindex="-1" id="mymodal1" class="modal fade">

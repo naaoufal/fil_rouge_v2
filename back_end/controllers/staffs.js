@@ -1,5 +1,6 @@
 const Staffs = require('../models/staffs')
 require('dotenv').config()
+const jwt = require('jsonwebtoken')
 
 // get all stuffs :
 async function all (req, res) {
@@ -58,9 +59,31 @@ async function deleteStaff (req, res) {
     })
 }
 
+// auth an admin (Json Web Token) :
+async function login (req, res, next) {
+    const {email, password} = req.body
+    Admin.findOne({
+        email : email,
+        password : password
+    }).then(admin => {
+        if(!admin){
+            res.json({message : "You re Not Allowed"})
+        } else {
+            const email = req.body.email
+            const password = req.body.password
+            const ad = {ademail : email, adpassword : password}
+            const accessToken = jwt.sign(ad, process.env.ACCESS_TOKEN_STAFF)
+            res.json({accessToken : accessToken})
+            res.ad = ad
+            next()
+        }
+    })
+}
+
 module.exports = {
     all,
     createOne,
     edit,
-    deleteStaff
+    deleteStaff,
+    login
 }
