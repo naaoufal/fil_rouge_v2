@@ -12,6 +12,9 @@ function PostManagement () {
     // const [isValid, setIsValid] = useState(false)
     // const [statPost, setStatPost] = useState("")
     // const [date, setDate] = useState("")
+    
+    // initialise toast config
+    toast.configure()
 
     // init history:
     let history = useHistory()
@@ -35,6 +38,79 @@ function PostManagement () {
             return res.json()
         }).then(data => {
             setPosts(data)
+        })
+    }
+
+    // function to edit post status :
+    const editStat = (id, is_valid) => {
+        //console.log(id, !JSON.parse(is_valid))
+        fetch(`http://localhost:3001/api/posts/edit/${id}`, {
+            method : 'PATCH',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({
+                is_valid : !JSON.parse(is_valid)
+            })
+        }).then(res => {
+            renderPosts()
+        })
+        if(is_valid == "false") {
+            toast.success("Post a ete valider avec success", {
+                position : "bottom-right"
+            })
+        } else {
+            toast.error("Post a ete de-Valider avec success", {
+                position : "bottom-right"
+            })
+        }
+    }
+
+    // function to edit post status :
+    const editSolution = (id, stat_post) => {
+        //console.log(id, stat_post)
+        if(stat_post == "Pending") {
+            fetch(`http://localhost:3001/api/posts/edit/${id}`, {
+                method : 'PATCH',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    stat_post : "done"
+                })
+            }).then(res => {
+                renderPosts()
+            })
+            toast.success("Post a ete resolu avec success", {
+                position : "bottom-right"
+            })
+        } else {
+            fetch(`http://localhost:3001/api/posts/edit/${id}`, {
+                method : 'PATCH',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    stat_post : "Pending"
+                })
+            }).then(res => {
+                renderPosts()
+            })
+            toast.warning("Post n aucune solution pour le moment !!", {
+                position : "bottom-right"
+            })
+        }
+    }
+
+    // function to delete a post by ID :
+    const deletePost = (id) => {
+        fetch(`http://localhost:3001/api/posts/delete/${id}`, {
+            method : 'DELETE'
+        }).then(res => {
+            renderPosts()
+            toast.error("Post a ete supprimer avec success !!!", {
+                position : "bottom-right"
+            })
         })
     }
 
@@ -106,6 +182,7 @@ function PostManagement () {
                                             <th>CreatedAt</th>
                                             <th>Post Valider/Non</th>
                                             <th>Status</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody id="modifier">
@@ -113,16 +190,21 @@ function PostManagement () {
                                             <tr key={i._id}>
                                                 <td>{i.title}</td>
                                                 <td>{i.createdAt}</td>
-                                                {i.is_valid == false ?
+                                                {i.is_valid == "false" ?
                                                 <td>
-                                                    <button className="btn btn-danger">Valider</button>
+                                                    <button className="btn btn-info" onClick={() => {editStat(i._id, i.is_valid)}}>Valider</button>
                                                 </td> 
                                                 : 
                                                 <td>
-                                                    <button className="btn btn-danger">De-Valider</button>
+                                                    <button className="btn btn-warning" onClick={() => {editStat(i._id, i.is_valid)}}>De-Valider</button>
                                                 </td>
                                                 }
-                                                <td>{i.stat_post}</td>
+                                                <td>{i.stat_post == "Pending" ?
+                                                    <button className="btn btn-warning" onClick={() => {editSolution(i._id, i.stat_post)}}>En Attente</button>
+                                                    :
+                                                    <button className="btn btn-info" onClick={() => {editSolution(i._id, i.stat_post)}}>Resolu</button>
+                                                }</td>
+                                                <td><button className="btn btn-danger" onClick={() => {deletePost(i._id)}}>Supprimer</button></td>
                                             </tr>
                                         ))}
                                     </tbody>

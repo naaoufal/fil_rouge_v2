@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { toast, ToastContainer, Zoom } from "react-toastify"
 import Header from './Header'
 import './styles/index.css'
 import ModalConn from "./Modals/ModalConn"
 
 function PostDetails () {
+
+    const location = useLocation()
+    //console.log(location.state)
+    const data = location.state
+
+
     return (
         <section id="container">
             <Header />
@@ -16,23 +22,23 @@ function PostDetails () {
                     <div class="chat-room mt">
                         <aside class="mid-side">
                             <div class="chat-room-head">
-                                <h3>Le titre de Problème</h3>
+                                <h3>{data.title}</h3>
                                 <hr></hr>
                                 <div>
-                                    <label></label>
-                                    <span class="label label-warning">Pending</span> ||
-                                    <span class="label label-success">Solution found</span> ||
-                                    <span class="label label-danger">Solution not found</span>
+                                    {data.stat_post == "Pending" ?
+                                    <span class="label label-warning">En Attente</span>
+                                    :
+                                    <span class="label label-success">Resolu</span>
+                                    }
                                 </div>
                             </div>
                             <div className="room-desk">
                                 <div class="room-box" style={{
                                     backgroundColor : "white"
                                 }}>
-                                    <p>here we put the description of , here we put the description of data, here we put the description of data, here we put the description of data</p>
-                                    <p>here we put the description of , here we put the description of data, here we put the description of data, here we put the description of data</p>
+                                    <p>{data.desc}</p>
                                 </div>
-                                <div className="room-box">
+                                <div className="">
                                     <div class="group-rom">
                                         <div class="first-part">
                                             <span>User1</span>

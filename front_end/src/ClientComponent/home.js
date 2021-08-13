@@ -12,6 +12,8 @@ function UserHome () {
     toast.configure()
     // init token
     const token = sessionStorage.getItem('token')
+    const info = JSON.parse(localStorage.getItem('clientInfo'))
+    const [change, setChange] = useState("")
     //const info = JSON.parse(localStorage.getItem('userInfo'))
     const [tags, setTags] = useState([])
     const [posts, setPosts] = useState([])
@@ -53,7 +55,7 @@ function UserHome () {
             body : JSON.stringify({
                 title : titlePost,
                 desc : descPost,
-                user_id : "Test_for_mement",
+                user_id : info._id,
                 is_valid : false,
                 stat_post : "Pending",
                 createdAt : Date.now(),
@@ -63,7 +65,9 @@ function UserHome () {
             return res.json()
         }).then(data => {
             if(data) {
-                window.location.reload()
+                toast.info("Attend pour la validation de Votre post ;)")
+                //setChange("modal")
+                //window.location.reload()
             } else {
                 toast.error("Y a une Erreur Vérifier Vos Données")
             }
@@ -74,7 +78,7 @@ function UserHome () {
     useEffect(() => {
         renderTagsData()
         renderPostsData()
-        //console.log(token)
+        console.log(info)
     }, [])
 
     return (
@@ -91,7 +95,21 @@ function UserHome () {
                                 </form>
                             </div>
                             <div className="room-desk">
-                                <button data-toggle="modal" data-target={!token ? "#sign" : "#exampleModal"} class="pull-right btn btn-theme">Poser Une Question</button>
+                                <div className="row">
+                                    <div className="col-md-10">
+                                        {token ?
+                                            <div className="room-box">
+                                                <p>Bienvenue Mr / Mme : {info.firstname} {info.lastname}</p>
+                                            </div> 
+                                        :null}
+                                    </div>
+                                    <div className="col-md-2">
+                                        <button style={{
+                                            padding : "14px 20px",
+                                            margin : "10px"
+                                        }} data-toggle="modal" data-target={!token ? "#sign" : "#exampleModal"} class="pull-right btn btn-theme">Poser Une Question</button>
+                                    </div>
+                                </div>
                                 {/* modal start */}
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -124,19 +142,33 @@ function UserHome () {
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                            <button type="button" class="btn btn-theme" onClick={addPost}>Poser</button>
+                                            <button type="button" class="btn btn-theme" data-dismiss={"modal"} onClick={addPost}>Poser</button>
                                         </div>
-                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                                 {/* modal end */}
                                 <ModalConn />
                                 {posts.map((i) => (
-                                    <div class="room-box">
-                                        <h5 class="text-primary"><a href="">{i.title}</a></h5>
-                                        <p>{i.desc}</p>
-                                        <p><span class="text-muted">Posté Par :</span> {i.user_id} | <span class="text-muted">Tag Mentionner :</span> {i.tag} | <span class="text-muted">Status :</span> {i.stat_post} | <span class="text-muted">Posté en :</span> {i.createdAt}</p>
-                                    </div>
+                                    <>
+                                    {i.is_valid == "true" ?
+                                        <div class="room-box">
+                                            <h5 class="text-primary" style={{cursor : "pointer"}}>
+                                                <a onClick={() => history.push("/postDetail", i)}>{i.title}</a>
+                                            </h5>
+                                            <p>{i.desc}</p>
+                                            <p><span class="text-muted">Posté Par :</span> {i.user_id} | <span class="text-muted">Tag Mentionner :</span> {i.tag} | <span class="text-muted">Posté en :</span> {i.createdAt}</p>
+                                            <p><span className="text-muted">Status :</span> {i.stat_post == "Pending" ?
+                                                <span class="label label-warning">En Attente</span>
+                                                :
+                                                <span class="label label-success">résolu</span>
+                                                }
+                                            </p>
+                                        </div>
+                                    :
+                                    null
+                                    }
+                                    </>
                                 ))}
                             </div>
                         </aside>

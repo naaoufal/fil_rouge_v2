@@ -11,6 +11,15 @@ function ModalConn () {
     const [emailCon, setEmailCon] = useState("")
     const [passCon, setPassCon] = useState("")
     const [check, setCheck] = useState("")
+    // states for inscription :
+    const [fname, setFname] = useState("")
+    const [lname, setLname] = useState("")
+    const [emailIns, setEmailIns] = useState("")
+    const [imageIns, setImageIns] = useState("")
+    const [genderIns, setGenderIns] = useState("")
+    const [addIns, setAddIns] = useState("")
+    const [teleIns, setTeleIns] = useState("")
+    const [passIns, setPassIns] = useState("")
 
     // check if user conencted or not to publish a new post :
     const checkPost = (event) => {
@@ -37,11 +46,32 @@ function ModalConn () {
             if(data.accessToken) {
                 sessionStorage.setItem('token', data.accessToken)
                 toast.success("Connecté(e)")
-                window.location.reload()
+                fetch("http://localhost:3001/api/clients/all", {
+                    headers : {
+                        'Authorization' : 'Bearer ' + data.accessToken
+                    }
+                }).then(res => {
+                    return res.json()
+                }).then(info => {
+                    info.map((j) => {
+                        if(j.email == emailCon && j.password == passCon) {
+                            //console.log(j)
+                            localStorage.setItem('clientInfo', JSON.stringify(j))
+                            //window.location.reload()
+                            history.push("/")
+                        }
+                    })
+                })
+                //window.location.reload()
             } else {
                 toast.error(data.message)
             }
         })
+    }
+
+    // function to create new client :
+    const createClient = () => {
+        console.log(fname, lname, imageIns, genderIns, emailIns, addIns, teleIns, passIns)
     }
 
     return (
@@ -86,19 +116,19 @@ function ModalConn () {
                     <>
                         <hr></hr>
                         <div className="group-control">
-                            <input placeholder="Entrer Votre Nom" type="text" className="form-control placeholder-no-fix" />
+                            <input  onChange={event => setFname(event.target.value)} placeholder="Entrer Votre Nom" type="text" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <input placeholder="Entrer Votre Prenom" type="text" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setLname(event.target.value)} placeholder="Entrer Votre Prenom" type="text" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <input placeholder="Entrer Votre Email" type="file" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setImageIns(event.target.value)} placeholder="Entrer Votre Email" type="file" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <select id="sel" className="form-control placeholder-no-fix">
+                            <select onChange={event => setGenderIns(event.target.value)} id="sel" className="form-control placeholder-no-fix">
                                 <option>Selectionner Votre Sexe</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -106,15 +136,15 @@ function ModalConn () {
                         </div>
                         <br />
                         <div className="group-control">
-                            <input placeholder="Entrer Votre address" type="text" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setAddIns(event.target.value)} placeholder="Entrer Votre address" type="text" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <input placeholder="Entrer Votre Telephone" type="text" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setTeleIns(event.target.value)} placeholder="Entrer Votre Telephone" type="text" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <input placeholder="Entrer Votre Mot de passe" type="text" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setPassIns(event.target.value)} placeholder="Entrer Votre Mot de passe" type="password" className="form-control placeholder-no-fix" />
                         </div>
                         <hr></hr>
                     </>
@@ -125,10 +155,10 @@ function ModalConn () {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                     {check == "conn" ?
-                        <button type="button" class="btn btn-theme" onClick={connectTo}>Connexion</button>
+                        <button type="button" class="btn btn-theme" data-dismiss="modal" onClick={connectTo}>Connexion</button>
                     :
                     check == "insc" ?
-                        <button type="button" class="btn btn-theme">Inscription</button>
+                        <button type="button" data-dismiss="modal" onClick={createClient} class="btn btn-theme">Inscription</button>
                     :
                     null
                     }
