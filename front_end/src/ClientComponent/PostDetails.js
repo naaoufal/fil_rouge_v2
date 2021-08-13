@@ -38,7 +38,7 @@ function PostDetails () {
                                 }}>
                                     <p>{data.desc}</p>
                                 </div>
-                                <div className="">
+                                <div className="room-box">
                                     <div class="group-rom">
                                         <div class="first-part">
                                             <span>User1</span>

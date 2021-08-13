@@ -37,7 +37,7 @@ async function createOne (req, res) {
     const client = new Client({
         firstname : req.body.firstname,
         lastname : req.body.lastname,
-        image : req.file.filename,
+        // image : 'images/' + req.file.filename,
         gender : req.body.gender,
         email : req.body.email,
         adress : req.body.adress,
