@@ -15,7 +15,7 @@ function ModalConn () {
     const [fname, setFname] = useState("")
     const [lname, setLname] = useState("")
     const [emailIns, setEmailIns] = useState("")
-    //const [imageIns, setImageIns] = useState("")
+    const [imageIns, setImageIns] = useState("")
     const [genderIns, setGenderIns] = useState("")
     const [addIns, setAddIns] = useState("")
     const [teleIns, setTeleIns] = useState("")
@@ -71,45 +71,7 @@ function ModalConn () {
 
     // function to create new client :
     const createClient = () => {
-        //const imageIns = document.querySelector('#myFile').value
-        //console.log(fname, lname, imageIns, genderIns, emailIns, addIns, teleIns, passIns)
-        fetch("http://localhost:3001/api/clients/add", {
-            method : 'POST',
-            headers : {
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify({
-                firstname : fname,
-                lastname : lname,
-                phone : teleIns,
-                gender : genderIns,
-                email : emailIns,
-                adress : addIns,
-                password : passIns,
-                is_valid : false,
-                suspended : false
-            })
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-            if(data.message) {
-                toast.error(data.message)
-            } else {
-                toast.success("votre compte a ete crée avec succès, merci d'avoir attendu que l'admin valide votre compte")
-                clearInputs()
-            }
-        })
-    }
-
-    // function to clear Inputs :
-    const clearInputs = () => {
-        document.querySelector('#fn').value = ""
-        document.querySelector('#ln').value = ""
-        document.querySelector('#em').value = ""
-        // document.querySelector('#gr').value = ""
-        document.querySelector('#adr').value = ""
-        document.querySelector('#ph').value = ""
-        document.querySelector('#ps').value = ""
+        console.log(fname, lname, imageIns, genderIns, emailIns, addIns, teleIns, passIns)
     }
 
     return (
@@ -154,23 +116,19 @@ function ModalConn () {
                     <>
                         <hr></hr>
                         <div className="group-control">
-                            <input id="fn" onChange={event => setFname(event.target.value)} placeholder="Entrer Votre Nom" type="text" className="form-control placeholder-no-fix" />
+                            <input  onChange={event => setFname(event.target.value)} placeholder="Entrer Votre Nom" type="text" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <input id="ln" onChange={event => setLname(event.target.value)} placeholder="Entrer Votre Prenom" type="text" className="form-control placeholder-no-fix" />
-                        </div>
-                        {/* <br />
-                        <div className="group-control">
-                            <input id="myFile" placeholder="Entrer Votre Image" type="file" className="form-control placeholder-no-fix" />
-                        </div> */}
-                        <br />
-                        <div className="group-control">
-                            <input id="em" onChange={event => setEmailIns(event.target.value)} placeholder="Entrer Votre Email" type="text" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setLname(event.target.value)} placeholder="Entrer Votre Prenom" type="text" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <select id="gr" onChange={event => setGenderIns(event.target.value)} id="sel" className="form-control placeholder-no-fix">
+                            <input onChange={event => setImageIns(event.target.value)} placeholder="Entrer Votre Email" type="file" className="form-control placeholder-no-fix" />
+                        </div>
+                        <br />
+                        <div className="group-control">
+                            <select onChange={event => setGenderIns(event.target.value)} id="sel" className="form-control placeholder-no-fix">
                                 <option>Selectionner Votre Sexe</option>
                                 <option>Male</option>
                                 <option>Female</option>
@@ -178,15 +136,15 @@ function ModalConn () {
                         </div>
                         <br />
                         <div className="group-control">
-                            <input id="adr" onChange={event => setAddIns(event.target.value)} placeholder="Entrer Votre address" type="text" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setAddIns(event.target.value)} placeholder="Entrer Votre address" type="text" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <input id="ph" onChange={event => setTeleIns(event.target.value)} placeholder="Entrer Votre Telephone" type="text" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setTeleIns(event.target.value)} placeholder="Entrer Votre Telephone" type="text" className="form-control placeholder-no-fix" />
                         </div>
                         <br />
                         <div className="group-control">
-                            <input id="ps" onChange={event => setPassIns(event.target.value)} placeholder="Entrer Votre Mot de passe" type="password" className="form-control placeholder-no-fix" />
+                            <input onChange={event => setPassIns(event.target.value)} placeholder="Entrer Votre Mot de passe" type="password" className="form-control placeholder-no-fix" />
                         </div>
                         <hr></hr>
                     </>
@@ -200,7 +158,7 @@ function ModalConn () {
                         <button type="button" class="btn btn-theme" data-dismiss="modal" onClick={connectTo}>Connexion</button>
                     :
                     check == "insc" ?
-                        <button type="button"  onClick={createClient} class="btn btn-theme">Inscription</button>
+                        <button type="button" data-dismiss="modal" onClick={createClient} class="btn btn-theme">Inscription</button>
                     :
                     null
                     }
